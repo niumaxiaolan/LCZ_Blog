@@ -20,34 +20,19 @@ import com.liuchuanzheng.lcz_wanandroid.module.home.repository.UserRepository
  * 作用:
  * 注意事项:
  */
-class LoginViewModel : BaseViewModel() {
+class RegisterViewModel : BaseViewModel() {
     private val userRepository by lazy { UserRepository() }
 
     //这里基本只做一些和ui相关的基本操作，比如toast，loading等，更具体的ui操作还是要到activity中
-    fun login(phone: String, password: String): MutableLiveData<CommonResultBean<LoginResult>> {
-        val resultLiveData = MutableLiveData<CommonResultBean<LoginResult>>()
+    fun register(phone: String, password: String): MutableLiveData<CommonResultBean<*>> {
+        val resultLiveData = MutableLiveData<CommonResultBean<*>>()
         launch(
             workBlock = {
-                var result = userRepository.login(phone, password)
+                var result = userRepository.register(phone, password)
                 handleResult(result,
                     successBlock = {
-                        toast("登录成功")
-                        result.data?.let { data ->
-                            val userInfo = UserManager.getUserInfo()
-                            userInfo.isLogin = true
-                            userInfo.phone = data.phone
-                            userInfo.username = data.username
-                            userInfo.icon = data.iconUrl
-                            userInfo.id = data.id
-                            UserManager.updateUserInfo(userInfo)
-                        }
-
-                        LoginStatusEvent().apply {
-                            isLogin = true
-                            LiveEventBus.get(LoginStatusEvent::class.java).post(this)
-                        }
+                        toast("注册成功")
                         resultLiveData.value = result //如果所有ui操作都再vm中处理完。是可以不传给activity结果的
-
 
                     },
                     failBlock = {
@@ -56,7 +41,7 @@ class LoginViewModel : BaseViewModel() {
 
                 )
 
-            }, true, "正在登录..."
+            }, true, "正在注册..."
         )
         return resultLiveData
     }

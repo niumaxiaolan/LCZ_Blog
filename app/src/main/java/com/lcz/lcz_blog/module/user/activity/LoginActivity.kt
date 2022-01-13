@@ -8,15 +8,17 @@ import com.lcz.lcz_blog.R
 import com.lcz.lcz_blog.base.BaseIntentBean
 import com.lcz.lcz_blog.base.BaseVMActivity
 import com.lcz.lcz_blog.databinding.ActivityLoginBinding
+import com.lcz.lcz_blog.databinding.ActivityRegisterBinding
 import com.lcz.lcz_blog.module.mian.activity.MainActivity
 import com.lcz.lcz_blog.module.user.viewmodel.LoginViewModel
+import com.lcz.lcz_blog.store.UserManager
 import com.lcz.lcz_blog.util.log.LogUtil
 import com.liuchuanzheng.baselib.util.lcz.toast
 import com.liuchuanzheng.lcz_wanandroid.base.BaseActivity
 import com.liuchuanzheng.lcz_wanandroid.base.Constant
 
 class LoginActivity : BaseVMActivity<LoginViewModel>() {
-    lateinit var mViewBinding: ActivityLoginBinding
+    val mViewBinding by lazy { ActivityLoginBinding.inflate(layoutInflater) }
     var intentBean: IntentBean = IntentBean()
 
     companion object {
@@ -31,7 +33,6 @@ class LoginActivity : BaseVMActivity<LoginViewModel>() {
 
 
     override fun setContentView() {
-        mViewBinding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(mViewBinding.root)
 
     }
@@ -48,8 +49,15 @@ class LoginActivity : BaseVMActivity<LoginViewModel>() {
         mViewBinding.ivDeletePassword.setOnClickListener {
             mViewBinding.etPassword.setText("")
         }
-        mViewBinding.etPhone.setText("18501231486")
+        //为了方便调试，预填一些数据
+        val userInfo = UserManager.getUserInfo()
+        if (userInfo.phone.isNullOrEmpty()) {
+            mViewBinding.etPhone.setText("18501231486")
+        }else{
+            mViewBinding.etPhone.setText(userInfo.phone)
+        }
         mViewBinding.etPassword.setText("111111")
+
         mViewBinding.tvLogin.setOnClickListener {
             val phone = mViewBinding.etPhone.text.toString()
             val password = mViewBinding.etPassword.text.toString()
@@ -60,6 +68,9 @@ class LoginActivity : BaseVMActivity<LoginViewModel>() {
                     login(phone, password)
                 }
             }
+        }
+        mViewBinding.tvRegister.setOnClickListener {
+            RegisterActivity.startActivity(activity, RegisterActivity.Companion.IntentBean())
         }
     }
 

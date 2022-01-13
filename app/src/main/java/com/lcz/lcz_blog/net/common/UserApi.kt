@@ -12,5 +12,7 @@ interface UserApi {
 
     @POST("/user/login")
     suspend fun login(@Query("phone") phone: String, @Query("password") password: String): CommonResultBean<LoginResult>
+    @POST("/user/register")
+    suspend fun register(@Query("phone") phone: String, @Query("password") password: String): CommonResultBean<*>
 
 }

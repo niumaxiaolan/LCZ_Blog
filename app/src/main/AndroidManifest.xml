@@ -12,6 +12,7 @@
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.LCZ_Blog">
         <activity
+            android:launchMode="singleTask"
             android:name=".module.user.activity.LoginActivity"
             android:exported="false" />
         <activity
@@ -23,7 +24,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".module.user.activity.RegisterActivity" />
+        <activity
+            android:launchMode="singleTask"
+            android:name=".module.user.activity.RegisterActivity" />
         <activity android:name=".module.mian.activity.MainActivity" />
     </application>
 
