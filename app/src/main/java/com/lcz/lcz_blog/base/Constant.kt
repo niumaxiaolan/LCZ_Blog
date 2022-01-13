@@ -14,7 +14,8 @@ object Constant {
          * 这个url是gradle中配置的。可以通过指定打包方式选择不同的值
          * 网络请求的baseUrl
          */
-        var request_base_url: String = "http://192.168.1.127:10001"
+        var request_base_url: String = "http://192.168.1.127:10001" //本地服务器
+//        var request_base_url: String = "http://101.37.76.6:10001" //阿里云服务器
     }
     /**
      * intent传递字段
