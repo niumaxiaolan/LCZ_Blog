@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import androidx.annotation.NonNull
 import com.dele.kuaiqicha.base.store.AppManager
 import com.lcz.lcz_blog.module.mian.activity.MainActivity
 import com.lcz.lcz_blog.R
@@ -31,11 +32,9 @@ class SplashActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         mViewBinding.apply {
             animationView2.loop(false)
+
             btnGo.setOnClickListener {
-                animationView.visibility = View.GONE
-                animationView2.visibility = View.VISIBLE
-                animationView2.playAnimation()
-                findViewById<Button>(R.id.btn_go).visibility = View.GONE
+                startAnimal2()
             }
             animationView2.addAnimatorListener(object : Animator.AnimatorListener {
                 /**
@@ -56,6 +55,7 @@ class SplashActivity : BaseActivity() {
                  * @param animation The animation which reached its end.
                  */
                 override fun onAnimationEnd(animation: Animator?) {
+                    AppManager.saveSplashShowedStatus(true)
                     finish()
                     AppManager.analyseGoToMain(this@SplashActivity)
                 }
@@ -82,6 +82,11 @@ class SplashActivity : BaseActivity() {
                 }
 
             })
+
+            if (AppManager.getSplashShowedStatus()) {
+                //展示过一次。就简化闪屏
+                startAnimal2()
+            }
         }
 
         //协程的写法。
@@ -92,4 +97,14 @@ class SplashActivity : BaseActivity() {
 //        }
 
     }
+    private fun startAnimal2() {
+        mViewBinding.apply {
+            animationView.visibility = View.GONE
+            animationView2.visibility = View.VISIBLE
+            animationView2.playAnimation()
+            btnGo.visibility = View.GONE
+        }
+
+    }
+
 }

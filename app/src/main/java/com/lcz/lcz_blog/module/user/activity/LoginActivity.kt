@@ -64,12 +64,12 @@ class LoginActivity : BaseVMActivity<LoginViewModel>() {
     }
 
     fun login(phone: String, password: String) {
-        mViewModel.login(phone, password).observe(this, {
+        mViewModel.login(phone, password).observe(this) {
             LogUtil.i(it.toString())
             if (it.isServerResultOK()) {
                 startActivity(Intent(activity, MainActivity::class.java))
             }
-        })
+        }
     }
 
     private fun initTitle() {
@@ -77,11 +77,5 @@ class LoginActivity : BaseVMActivity<LoginViewModel>() {
             finish()
         }
         mViewBinding.layoutTitle.tvTitle.text = ""
-    }
-
-    override fun observeViewModel() {
-        mViewModel.run {
-
-        }
     }
 }

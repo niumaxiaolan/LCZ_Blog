@@ -3,9 +3,11 @@ package com.dele.kuaiqicha.base.store
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import com.blankj.utilcode.util.SPUtils
 import com.lcz.lcz_blog.module.mian.activity.MainActivity
 import com.lcz.lcz_blog.module.user.activity.LoginActivity
 import com.lcz.lcz_blog.store.UserManager
+import com.liuchuanzheng.lcz_wanandroid.base.Constant
 
 /**
  * @author 刘传政
@@ -38,4 +40,12 @@ object AppManager {
         }
     }
 
+    fun saveSplashShowedStatus(isFirst: Boolean) {
+        SPUtils.getInstance(Constant.SP.AppStatus.spName)
+            .put(Constant.SP.AppStatus.Key.splash, isFirst)
+    }
+
+    fun getSplashShowedStatus(): Boolean {
+        return SPUtils.getInstance(Constant.SP.AppStatus.spName).getBoolean(Constant.SP.AppStatus.Key.splash, false)
+    }
 }

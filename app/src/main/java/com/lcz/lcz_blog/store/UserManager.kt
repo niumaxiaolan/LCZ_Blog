@@ -3,6 +3,7 @@ package com.lcz.lcz_blog.store
 import android.annotation.SuppressLint
 import com.blankj.utilcode.util.GsonUtils
 import com.blankj.utilcode.util.SPUtils
+import com.google.gson.Gson
 import com.liuchuanzheng.lcz_wanandroid.base.Constant
 
 object UserManager {
@@ -36,7 +37,13 @@ object UserManager {
         try {
             val json: String =
                 SPUtils.getInstance(Constant.SP.UserInfo.spName).getString(Constant.SP.UserInfo.Key.data)
-            userInfo = GsonUtils.fromJson<UserInfo>(json, UserInfo::class.java)
+//            userInfo = GsonUtils.fromJson<UserInfo>(json, UserInfo::class.java)
+            var gson = Gson()
+            var fromJson = gson.fromJson<UserInfo>(json, UserInfo::class.java)
+            if (fromJson != null) {
+                userInfo = fromJson
+            }
+
         } catch (e: Exception) {
             e.printStackTrace()
         }

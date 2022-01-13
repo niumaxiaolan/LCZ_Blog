@@ -13,6 +13,7 @@ import retrofit2.http.Query
  * 注意事项:
  */
 class UserRepository : BaseRepository() {
-    suspend fun login(phone: String, password: String) = UserRetrofitManager.apiService.login(phone,password)
+    suspend fun login(phone: String, password: String) =
+        safeGetData { UserRetrofitManager.apiService.login(phone, password) }
 
 }

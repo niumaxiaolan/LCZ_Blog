@@ -56,6 +56,19 @@ object Constant {
                 const val data = "data"
             }
         }
+        object AppStatus{
+            /**
+             * sp名字
+             * 用户信息相关
+             */
+            const val spName = "AppStatus"
+            object Key{
+                /**
+                 * 数据的key
+                 */
+                const val splash = "splash"
+            }
+        }
 
     }
 

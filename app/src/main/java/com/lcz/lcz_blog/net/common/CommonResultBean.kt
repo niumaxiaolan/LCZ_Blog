@@ -11,10 +11,11 @@ import com.lcz.lcz_blog.net.base.BaseResultBean
  * 作用:这里时项目具体的网络返回基类。
  * 注意事项:
  */
-const val SUCCESS = 200
+const val CODE_SUCCESS = 200
+const val CODE_FAIL = -404 //这不是网络返回的，是app网络请求时报错，自己统一定义的。比如json转换失败，超时等
 class CommonResultBean<T> : BaseResultBean {
 
-    var code = SUCCESS
+    var code = CODE_SUCCESS
     var msg: String = ""
     var data: T? = null
     override fun getAppCode(): Int {
@@ -26,7 +27,7 @@ class CommonResultBean<T> : BaseResultBean {
     }
 
     override fun isServerResultOK(): Boolean {
-        return code == SUCCESS
+        return code == CODE_SUCCESS
     }
 
     override fun toString(): String {

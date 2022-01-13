@@ -1,7 +1,10 @@
 package com.liuchuanzheng.lcz_wanandroid.base
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.lcz.lcz_blog.base.BaseVMEvent
+import com.lcz.lcz_blog.base.EventType
 import com.lcz.lcz_blog.net.common.CommonResultBean
 import com.lcz.lcz_blog.util.log.LogUtil
 import kotlinx.coroutines.CoroutineScope
@@ -16,29 +19,32 @@ import kotlinx.coroutines.launch
  * 作用:
  * 注意事项:
  */
-abstract class BaseViewModel : ViewModel() {
+open class BaseViewModel : ViewModel() {
+    //所有通用的事件
+    val liveData_event = MutableLiveData<BaseVMEvent>()
+
     /**
      * 创建并执行协程
-     * @param workBlock 协程中执行
-     * @param errorBlock 错误时执行
+     * @param workBlock [@kotlin.ExtensionFunctionType] SuspendFunction1<CoroutineScope, Unit> 获取数据，拿到结果并处理
+     * @param handleLoading Boolean 是否处理loading框 默认处理
+     * @param loadingMsg String?  loading框的显示文字 不传也没事，app有默认文字
      * @return Job
      */
-    protected fun launch(
+    fun launch(
         workBlock: suspend CoroutineScope.() -> Unit,
-        errorBlock: ((e: Exception) -> Unit)? = null,
-        finillyBlock:(()->Unit)? = null //这里可以发送loading消失的消息
+        handleLoading: Boolean = true,
+        loadingMsg: String? = null
     ): Job {
-        return viewModelScope.launch {
-            try {
-                workBlock()
-            } catch (e: Exception) {
-                e.printStackTrace()
-                LogUtil.e(e.toString())
-                errorBlock?.invoke(e)
-            } finally {
-                finillyBlock?.invoke()
+        if (handleLoading) {
+            liveData_event.value = BaseVMEvent(EventType.SHOW_LOADING, loadingMsg)
+        }
+        var job = viewModelScope.launch {
+            workBlock()
+            if (handleLoading) {
+                liveData_event.value = BaseVMEvent(EventType.HIDE_LOADING)
             }
         }
+        return job
     }
 
     fun handleResult(

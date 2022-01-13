@@ -10,10 +10,6 @@ class MainActivity : BaseVMActivity<BaseViewModel>() {
 
     }
 
-    override fun observeViewModel() {
-
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)

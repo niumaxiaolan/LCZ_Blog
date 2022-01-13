@@ -11,9 +11,9 @@ package com.lcz.lcz_blog.module.user.bean
  * </pre>
  */
 data class LoginResult(
-    var iconUrl: Any = Any(), // null
+    var iconUrl: String = "", // null
     var id: Int = 0, // 3
-    var password: Any = Any(), // null
+    var password: String = "", // null
     var phone: String = "", // 18501231486
     var registerTime: String = "", // 2022-01-06 14:44:42
     var updateTime: String = "", // 2022-01-06 14:44:42

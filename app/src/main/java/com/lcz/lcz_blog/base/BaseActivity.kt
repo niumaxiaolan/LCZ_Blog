@@ -32,6 +32,7 @@ abstract class BaseActivity : AppCompatActivity(), ILoading {
         super.onCreate(savedInstanceState)
         context = this
         activity = this
+        initStatusColor()
         loadingDialog = DialogUtil(activity)
         //因为大部分界面在没有特意适配横屏时，自动适配效果根本不理想，所以直接强制竖屏，有特殊需要自己再设置
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
@@ -60,7 +61,16 @@ abstract class BaseActivity : AppCompatActivity(), ILoading {
             return null
         }
     }
-
+    /**
+     * 默认设置一下状态栏颜色,如果不满意可以自己再设置一遍
+     */
+    private fun initStatusColor() {
+        ImmersionBar.with(this) //状态栏颜色
+            .statusBarColor(R.color.common_bg_white) //状态栏文字颜色
+            .statusBarDarkFont(true)
+            .fitsSystemWindows(true) //使用该属性必须指定状态栏的颜色，不然状态栏透明，很难看. false表示布局嵌入状态栏。true表示布局避开状态栏
+            .init()
+    }
     override fun showLoading(msg: String) {
         loadingDialog.showLoading(msg)
     }
