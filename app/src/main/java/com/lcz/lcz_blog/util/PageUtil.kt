@@ -10,7 +10,7 @@ package com.lcz.lcz_blog.util
  */
 
 const val SERVER_FIRST_PAGE = 1
-const val COMMON_PAGE_SIZE = 20
+const val COMMON_PAGE_SIZE = 3
 
 object PageUtil {
     fun getCurrentPage(totalListCount: Int, pageSize: Int = COMMON_PAGE_SIZE): Int {

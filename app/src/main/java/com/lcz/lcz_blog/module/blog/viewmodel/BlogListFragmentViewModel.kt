@@ -26,17 +26,7 @@ class BlogListFragmentViewModel : BaseViewModel() {
             workBlock = {
                 var result = repository.getPageList(page)
                 liveData_complete.value = true
-                handleResult(result,
-                    successBlock = {
-                        resultLiveData.value = result //如果所有ui操作都再vm中处理完。是可以不传给activity结果的
-
-
-                    },
-                    failBlock = {
-                        toast("${result.msg}")
-                    }
-
-                )
+                resultLiveData.value = result //因为列表的ui操作太复杂，所以这里不处理了，返给view层
 
             }, false
         )

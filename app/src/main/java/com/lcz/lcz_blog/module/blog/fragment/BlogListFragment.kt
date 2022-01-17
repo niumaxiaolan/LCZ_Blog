@@ -1,6 +1,7 @@
 package com.lcz.lcz_blog.module.blog.fragment
 
 import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,12 +9,20 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
+import com.kingja.loadsir.callback.Callback
+import com.kingja.loadsir.core.LoadService
+import com.kingja.loadsir.core.LoadSir
+import com.kingja.loadsir.core.Transport
 import com.lcz.lcz_blog.R
+import com.lcz.lcz_blog.callback.EmptyCallback
+import com.lcz.lcz_blog.callback.LoadingCallback
 import com.lcz.lcz_blog.databinding.FragmentBlogListBinding
 import com.lcz.lcz_blog.module.blog.bean.BlogPageListResult
 import com.lcz.lcz_blog.module.blog.viewmodel.BlogListFragmentViewModel
 import com.lcz.lcz_blog.util.PageUtil
+import com.lcz.lcz_blog.util.RefreshUtil
 import com.lcz.lcz_blog.util.log.LogUtil
+import com.liuchuanzheng.baselib.util.lcz.toast
 import com.liuchuanzheng.lcz_wanandroid.base.BaseVMFragment
 import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
@@ -31,6 +40,7 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
 class BlogListFragment : BaseVMFragment<BlogListFragmentViewModel>() {
     lateinit var mViewBinding: FragmentBlogListBinding
     val adapter: MyAdapter by lazy { MyAdapter(null) }
+    lateinit var loadService: LoadService<Any>
     override fun creatView(inflater: LayoutInflater?, container: ViewGroup?): View {
         mViewBinding = FragmentBlogListBinding.inflate(inflater!!, container, false)
         return mViewBinding.root
@@ -42,6 +52,17 @@ class BlogListFragment : BaseVMFragment<BlogListFragmentViewModel>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        loadService = LoadSir.getDefault().register(
+            mViewBinding.smartRefreshLayout,
+            Callback.OnReloadListener {
+                loadService.showCallback(LoadingCallback::class.java)
+                getPageList(true)
+            }).setCallBack(EmptyCallback::class.java, object : Transport {
+            override fun order(context: Context, view: View) {
+                //在这里可以动态修改callback里的布局
+            }
+        })
+        loadService.showCallback(LoadingCallback::class.java)
         mViewBinding.recyclerView.setLayoutManager(LinearLayoutManager(requireActivity()))
         mViewBinding.recyclerView.adapter = adapter
         mViewBinding.smartRefreshLayout.setEnableLoadMore(true)
@@ -58,16 +79,25 @@ class BlogListFragment : BaseVMFragment<BlogListFragmentViewModel>() {
     }
 
     fun getPageList(isRefresh: Boolean) {
-        mViewModel.getPageList(PageUtil.getNextServerPageBean(isRefresh, adapter.data.size,2)).observe(this) {
+        mViewModel.getPageList(PageUtil.getNextServerPageBean(isRefresh, adapter.data.size))
+            .observe(viewLifecycleOwner) {
+                RefreshUtil.changeRefreshViewStatus(
+                    mViewBinding.smartRefreshLayout,
+                    it?.data?.dataList?.size ?: 0,
+                )
+                if (it.isServerResultOK()) {
+                    if (isRefresh) {
+                        adapter.setNewInstance(it.data?.dataList?.toMutableList())
+                    } else {
+                        adapter.addData(it.data?.dataList!!.toMutableList())
+                    }
+                } else {
+                    toast(it.msg)
+                }
 
-            if (isRefresh) {
-                adapter.setNewInstance(it.data?.dataList?.toMutableList())
-            }else{
-                adapter.addData(it.data?.dataList!!.toMutableList())
+                RefreshUtil.changeLoadServiceStatus(it.code, loadService, adapter.data.size)
             }
-
-        }
-        mViewModel.liveData_complete.observe(this){
+        mViewModel.liveData_complete.observe(viewLifecycleOwner) {
             mViewBinding.smartRefreshLayout.finishRefresh()
             mViewBinding.smartRefreshLayout.finishLoadMore()
         }
