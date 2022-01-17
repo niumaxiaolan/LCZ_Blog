@@ -2,6 +2,7 @@ package com.lcz.lcz_blog.module.blog.fragment
 
 import android.app.Activity
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,9 +20,11 @@ import com.lcz.lcz_blog.callback.LoadingCallback
 import com.lcz.lcz_blog.databinding.FragmentBlogListBinding
 import com.lcz.lcz_blog.module.blog.bean.BlogPageListResult
 import com.lcz.lcz_blog.module.blog.viewmodel.BlogListFragmentViewModel
+import com.lcz.lcz_blog.util.CommonLinearItemDecoration
 import com.lcz.lcz_blog.util.PageUtil
 import com.lcz.lcz_blog.util.RefreshUtil
 import com.lcz.lcz_blog.util.log.LogUtil
+import com.liuchuanzheng.baselib.util.lcz.LCZUtil
 import com.liuchuanzheng.baselib.util.lcz.toast
 import com.liuchuanzheng.lcz_wanandroid.base.BaseVMFragment
 import com.scwang.smartrefresh.layout.api.RefreshLayout
@@ -64,6 +67,9 @@ class BlogListFragment : BaseVMFragment<BlogListFragmentViewModel>() {
         })
         loadService.showCallback(LoadingCallback::class.java)
         mViewBinding.recyclerView.setLayoutManager(LinearLayoutManager(requireActivity()))
+        mViewBinding.recyclerView.addItemDecoration(
+            CommonLinearItemDecoration(dividerColor = Color.LTGRAY, dividerHeight = LCZUtil.dp2px(5f))
+        )
         mViewBinding.recyclerView.adapter = adapter
         mViewBinding.smartRefreshLayout.setEnableLoadMore(true)
         mViewBinding.smartRefreshLayout.setOnRefreshLoadMoreListener(object : OnRefreshLoadMoreListener {
@@ -113,6 +119,8 @@ class BlogListFragment : BaseVMFragment<BlogListFragmentViewModel>() {
         override fun convert(holder: BaseViewHolder, item: BlogPageListResult.Data) {
             holder.setText(R.id.tv_title, item.title)
             holder.setText(R.id.tv_content, item.content)
+            holder.setText(R.id.tv_username, item.user.username)
+            holder.setText(R.id.tv_date, item.createTime)
         }
     }
 }

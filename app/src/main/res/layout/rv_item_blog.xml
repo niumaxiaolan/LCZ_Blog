@@ -1,38 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/common_bg_white"
     android:foreground="?android:attr/selectableItemBackground"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:paddingHorizontal="@dimen/common_padding_14"
-    android:paddingBottom="@dimen/common_padding_10"
-    android:paddingTop="8dp">
+    android:paddingHorizontal="@dimen/common_padding_10"
+    android:paddingVertical="8dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
+
+
+
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            tools:text="强神官方传说"
-            android:textColor="#ff2079e6"
-            android:textSize="13sp" />
-        <TextView
-            android:id="@+id/tv_content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="强神官方传说"
-            android:textColor="#ff2079e6"
-            android:textSize="13sp" />
+            android:layout_marginLeft="8dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="3"
+                android:textColor="@color/common_text_333333"
+                android:textSize="18sp"
+                android:transitionName="NAME"
+                tools:text="强神传说官方" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/iv_icon"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_head_default"
+                    app:civ_border_color="@color/common_bg_white"
+                    app:civ_border_width="0dp" />
+                <TextView
+                    android:maxLines="1"
+                    android:id="@+id/tv_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#ff2079e6"
+                    android:textSize="13sp"
+                    tools:text="罗斯" />
+
+                <View
+                    android:layout_width="0.5dp"
+                    android:layout_height="14dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:background="#E3E3E3" />
 
 
+                <TextView
+                    android:maxLines="1"
+                    android:id="@+id/tv_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#ff333333"
+                    android:textSize="13sp"
+                    tools:text="2020-05-20" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="3"
+                    android:textColor="#ff999999"
+                    android:textSize="13sp"
+                    tools:text="信息传输，软件和信息技术..." />
+
+
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
     </LinearLayout>
+
 
 </LinearLayout>
