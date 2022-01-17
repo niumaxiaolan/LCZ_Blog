@@ -1,18 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".module.mian.activity.MainActivity">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <com.lcz.lcz_blog.weight.NoScrollViewPager
+        android:id="@+id/viewPager"
+        android:layout_above="@id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <View
+        android:layout_above="@id/tabLayout"
+        android:background="@color/common_bg_gray"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:layout_alignParentBottom="true"
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        app:tabBackground="@color/common_bg_white"
+        app:tabGravity="fill"
+        app:tabPaddingStart="-1dp"
+        app:tabPaddingEnd="-1dp"
+        app:tabIndicatorHeight="0dp"
+        app:tabMode="fixed"
+        app:tabSelectedTextColor="@color/common_theme"
+        app:tabTextColor="@color/black" />
+
+</RelativeLayout>

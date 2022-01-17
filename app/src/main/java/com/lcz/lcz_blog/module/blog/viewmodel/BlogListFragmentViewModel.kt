@@ -1,10 +1,12 @@
-package com.lcz.lcz_blog.module.user.viewmodel
+package com.lcz.lcz_blog.module.blog.viewmodel
 
 import androidx.lifecycle.MutableLiveData
+import com.lcz.lcz_blog.module.blog.bean.BlogPageListResult
+import com.lcz.lcz_blog.module.blog.repository.BlogRepository
 import com.lcz.lcz_blog.net.common.CommonResultBean
+import com.lcz.lcz_blog.util.PageBean
 import com.liuchuanzheng.baselib.util.lcz.toast
 import com.liuchuanzheng.lcz_wanandroid.base.BaseViewModel
-import com.lcz.lcz_blog.module.blog.repository.BlogRepository
 
 /**
  * @author 刘传政
@@ -14,19 +16,20 @@ import com.lcz.lcz_blog.module.blog.repository.BlogRepository
  * 作用:
  * 注意事项:
  */
-class RegisterViewModel : BaseViewModel() {
-    private val userRepository by lazy { BlogRepository() }
+class BlogListFragmentViewModel : BaseViewModel() {
+    private val repository by lazy { BlogRepository() }
+    val liveData_complete = MutableLiveData<Any>()
 
-    //这里基本只做一些和ui相关的基本操作，比如toast，loading等，更具体的ui操作还是要到activity中
-    fun register(phone: String, password: String): MutableLiveData<CommonResultBean<*>> {
-        val resultLiveData = MutableLiveData<CommonResultBean<*>>()
+    fun getPageList(page: PageBean): MutableLiveData<CommonResultBean<BlogPageListResult>> {
+        val resultLiveData = MutableLiveData<CommonResultBean<BlogPageListResult>>()
         launch(
             workBlock = {
-                var result = userRepository.register(phone, password)
+                var result = repository.getPageList(page)
+                liveData_complete.value = true
                 handleResult(result,
                     successBlock = {
-                        toast("注册成功")
                         resultLiveData.value = result //如果所有ui操作都再vm中处理完。是可以不传给activity结果的
+
 
                     },
                     failBlock = {
@@ -35,7 +38,7 @@ class RegisterViewModel : BaseViewModel() {
 
                 )
 
-            }, true, "正在注册..."
+            }, false
         )
         return resultLiveData
     }

@@ -13,7 +13,7 @@ import okhttp3.Interceptor
  * 如果有其他host,可以新建一个同样的类管理
  * 注意事项:
  */
-object UserRetrofitManager : RetrofitManager<UserApi>() {
+object MainRetrofitManager : RetrofitManager<MainApi>() {
     override fun getAppInterceptors(): List<Interceptor> {
         val listOf = listOf<Interceptor>(AppInterceptor())
         return listOf
