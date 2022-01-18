@@ -12,6 +12,9 @@ interface MainApi {
     @POST("/user/login")
     suspend fun login(@Query("phone") phone: String, @Query("password") password: String): CommonResultBean<LoginResult>
 
+    @GET("/user/user_info")
+    suspend fun userInfo(): CommonResultBean<LoginResult>
+
     @POST("/user/register")
     suspend fun register(@Query("phone") phone: String, @Query("password") password: String): CommonResultBean<*>
 
@@ -19,6 +22,13 @@ interface MainApi {
     suspend fun blogPageList(
         @Query("pageNo") pageNo: Int,
         @Query("pageSize") pageSize: Int
+    ): CommonResultBean<BlogPageListResult>
+
+    @POST("/blog/query_title")
+    suspend fun searchBlog(
+        @Query("pageNo") pageNo: Int,
+        @Query("pageSize") pageSize: Int,
+        @Query("keywords") keywords: String
     ): CommonResultBean<BlogPageListResult>
 
     @POST("/blog/add")

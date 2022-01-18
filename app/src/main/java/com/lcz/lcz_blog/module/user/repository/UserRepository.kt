@@ -18,4 +18,7 @@ class UserRepository : BaseRepository() {
     suspend fun register(phone: String, password: String) =
         safeGetData { MainRetrofitManager.apiService.register(phone, password) }
 
+    suspend fun userInfo() =
+        safeGetData { MainRetrofitManager.apiService.userInfo() }
+
 }

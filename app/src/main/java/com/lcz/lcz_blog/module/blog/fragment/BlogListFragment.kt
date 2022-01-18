@@ -21,6 +21,7 @@ import com.lcz.lcz_blog.callback.EmptyCallback
 import com.lcz.lcz_blog.callback.LoadingCallback
 import com.lcz.lcz_blog.databinding.FragmentBlogListBinding
 import com.lcz.lcz_blog.module.blog.activity.AddBlogActivity
+import com.lcz.lcz_blog.module.blog.activity.SearchBlogActivity
 import com.lcz.lcz_blog.module.blog.bean.BlogPageListResult
 import com.lcz.lcz_blog.module.blog.viewmodel.BlogListFragmentViewModel
 import com.lcz.lcz_blog.module.bus.UpdateBlogEvent
@@ -63,11 +64,7 @@ class BlogListFragment : BaseVMFragment<BlogListFragmentViewModel>() {
             Callback.OnReloadListener {
                 loadService.showCallback(LoadingCallback::class.java)
                 getPageList(true)
-            }).setCallBack(EmptyCallback::class.java, object : Transport {
-            override fun order(context: Context, view: View) {
-                //在这里可以动态修改callback里的布局
-            }
-        })
+            })
         loadService.showCallback(LoadingCallback::class.java)
         mViewBinding.recyclerView.setLayoutManager(LinearLayoutManager(requireActivity()))
         mViewBinding.recyclerView.addItemDecoration(
@@ -88,8 +85,12 @@ class BlogListFragment : BaseVMFragment<BlogListFragmentViewModel>() {
         mViewBinding.ivAdd.setOnClickListener {
             AddBlogActivity.startActivity(requireContext())
         }
+        mViewBinding.llSearch.setOnClickListener {
+            SearchBlogActivity.startActivityForTransition(requireActivity(), mViewBinding.llSearch)
+        }
         initBus()
     }
+
     private fun initBus() {
         //监听事件总线的消息
         LiveEventBus
@@ -98,6 +99,7 @@ class BlogListFragment : BaseVMFragment<BlogListFragmentViewModel>() {
                 getPageList(true)
             })
     }
+
     fun getPageList(isRefresh: Boolean) {
         mViewModel.getPageList(PageUtil.getNextServerPageBean(isRefresh, adapter.data.size))
             .observe(viewLifecycleOwner) {

@@ -10,7 +10,7 @@
         android:paddingHorizontal="@dimen/common_padding_10"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="44dp">
+        android:layout_height="45dp">
         <!--搜索框区域-->
         <LinearLayout
             android:paddingHorizontal="@dimen/common_padding_10"

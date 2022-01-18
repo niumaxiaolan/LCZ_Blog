@@ -31,6 +31,7 @@
         <activity
             android:exported="true"
             android:name=".module.blog.activity.AddBlogActivity" />
+        <activity android:name=".module.blog.activity.SearchBlogActivity" />
     </application>
 
 </manifest>

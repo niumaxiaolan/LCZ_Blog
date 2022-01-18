@@ -35,7 +35,7 @@ abstract class BaseVMActivity<VM : BaseViewModel> : BaseActivity() {
      * 主要是观察一些通用的数据，比如loading
      * 至于每个接口的结果，viewmodel都是每次创建一个livedata,所以用的时候再观察就行
      */
-    fun observeViewModel() {
+    open fun observeViewModel() {
         mViewModel.liveData_event.observe(this) {
             when (it.eventType) {
                 EventType.SHOW_LOADING -> {

@@ -17,6 +17,9 @@ class BlogRepository : BaseRepository() {
     suspend fun getPageList(page: PageBean) =
         safeGetData { MainRetrofitManager.apiService.blogPageList(page.pageNo, page.pageSize) }
 
+    suspend fun searchBlog(page: PageBean, keywords: String) =
+        safeGetData { MainRetrofitManager.apiService.searchBlog(page.pageNo, page.pageSize, keywords) }
+
     suspend fun register(phone: String, password: String) =
         safeGetData { MainRetrofitManager.apiService.register(phone, password) }
 

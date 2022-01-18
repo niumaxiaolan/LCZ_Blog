@@ -2,6 +2,7 @@ package com.lcz.lcz_blog.module.user.fragment
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -21,9 +22,13 @@ import com.lcz.lcz_blog.databinding.FragmentBlogListBinding
 import com.lcz.lcz_blog.databinding.FragmentMyBinding
 import com.lcz.lcz_blog.module.blog.bean.BlogPageListResult
 import com.lcz.lcz_blog.module.blog.viewmodel.BlogListFragmentViewModel
+import com.lcz.lcz_blog.module.mian.activity.MainActivity
+import com.lcz.lcz_blog.module.user.viewmodel.MyFragmentViewModel
 import com.lcz.lcz_blog.util.CommonLinearItemDecoration
+import com.lcz.lcz_blog.util.GlideUtil
 import com.lcz.lcz_blog.util.PageUtil
 import com.lcz.lcz_blog.util.RefreshUtil
+import com.lcz.lcz_blog.util.log.LogUtil
 import com.liuchuanzheng.baselib.util.lcz.LCZUtil
 import com.liuchuanzheng.baselib.util.lcz.toast
 import com.liuchuanzheng.lcz_wanandroid.base.BaseVMFragment
@@ -40,7 +45,7 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
  * 描述:
  * </pre>
  */
-class MyFragment : BaseVMFragment<BlogListFragmentViewModel>() {
+class MyFragment : BaseVMFragment<MyFragmentViewModel>() {
     lateinit var mViewBinding: FragmentMyBinding
     override fun creatView(inflater: LayoutInflater?, container: ViewGroup?): View {
         mViewBinding = FragmentMyBinding.inflate(inflater!!, container, false)
@@ -48,10 +53,19 @@ class MyFragment : BaseVMFragment<BlogListFragmentViewModel>() {
     }
 
     override fun onLazyLoad() {
+        net_getUserInfo()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
     }
 
+    fun net_getUserInfo() {
+        mViewModel.getUserInfo().observe(this) {
+            if (it.isServerResultOK()) {
+                mViewBinding.tvUsername.text = it.data?.username
+                GlideUtil.loadHead(activity, it.data?.iconUrl, mViewBinding.ivHead)
+            }
+        }
+    }
 }
