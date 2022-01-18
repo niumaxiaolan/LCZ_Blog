@@ -125,6 +125,9 @@ class SearchBlogActivity : BaseVMActivity<SearchBlogViewModel>() {
             CommonLinearItemDecoration(dividerColor = Color.parseColor("#EEEEEE"), dividerHeight = LCZUtil.dp2px(1f))
         )
         mViewBinding.recyclerView.adapter = adapter
+        adapter.setOnItemClickListener { adapter, view, position ->
+            BlogDetailActivity.startActivity(activity, intentBean = BlogDetailActivity.Companion.IntentBean(this.adapter.getItem(position).id))
+        }
         mViewBinding.smartRefreshLayout.setEnableLoadMore(true)
         mViewBinding.smartRefreshLayout.setOnRefreshLoadMoreListener(object : OnRefreshLoadMoreListener {
             override fun onRefresh(refreshLayout: RefreshLayout) {
@@ -190,6 +193,7 @@ class SearchBlogActivity : BaseVMActivity<SearchBlogViewModel>() {
             holder.setText(R.id.tv_content, item.content)
             holder.setText(R.id.tv_username, item.user.username)
             holder.setText(R.id.tv_date, item.createTime)
+            GlideUtil.loadHead(context, item.user.iconUrl, holder.getView(R.id.iv_icon))
         }
     }
 }

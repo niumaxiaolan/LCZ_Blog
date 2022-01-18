@@ -34,4 +34,7 @@ interface MainApi {
     @POST("/blog/add")
     suspend fun addBlog(@Body request: AddBlogRequest): CommonResultBean<Int>
 
+    @GET("/blog/queryById/{blogId}")
+    suspend fun getBlogById(@Path("blogId") blogId: Int): CommonResultBean<BlogPageListResult.Data>
+
 }

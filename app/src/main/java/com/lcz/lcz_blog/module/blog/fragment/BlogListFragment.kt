@@ -21,11 +21,13 @@ import com.lcz.lcz_blog.callback.EmptyCallback
 import com.lcz.lcz_blog.callback.LoadingCallback
 import com.lcz.lcz_blog.databinding.FragmentBlogListBinding
 import com.lcz.lcz_blog.module.blog.activity.AddBlogActivity
+import com.lcz.lcz_blog.module.blog.activity.BlogDetailActivity
 import com.lcz.lcz_blog.module.blog.activity.SearchBlogActivity
 import com.lcz.lcz_blog.module.blog.bean.BlogPageListResult
 import com.lcz.lcz_blog.module.blog.viewmodel.BlogListFragmentViewModel
 import com.lcz.lcz_blog.module.bus.UpdateBlogEvent
 import com.lcz.lcz_blog.util.CommonLinearItemDecoration
+import com.lcz.lcz_blog.util.GlideUtil
 import com.lcz.lcz_blog.util.PageUtil
 import com.lcz.lcz_blog.util.RefreshUtil
 import com.liuchuanzheng.baselib.util.lcz.LCZUtil
@@ -71,6 +73,9 @@ class BlogListFragment : BaseVMFragment<BlogListFragmentViewModel>() {
             CommonLinearItemDecoration(dividerColor = Color.parseColor("#EEEEEE"), dividerHeight = LCZUtil.dp2px(1f))
         )
         mViewBinding.recyclerView.adapter = adapter
+        adapter.setOnItemClickListener { adapter, view, position ->
+            BlogDetailActivity.startActivity(requireContext(), intentBean = BlogDetailActivity.Companion.IntentBean(this.adapter.getItem(position).id))
+        }
         mViewBinding.smartRefreshLayout.setEnableLoadMore(true)
         mViewBinding.smartRefreshLayout.setOnRefreshLoadMoreListener(object : OnRefreshLoadMoreListener {
             override fun onRefresh(refreshLayout: RefreshLayout) {
@@ -137,6 +142,7 @@ class BlogListFragment : BaseVMFragment<BlogListFragmentViewModel>() {
             holder.setText(R.id.tv_content, item.content)
             holder.setText(R.id.tv_username, item.user.username)
             holder.setText(R.id.tv_date, item.createTime)
+            GlideUtil.loadHead(context, item.user.iconUrl, holder.getView(R.id.iv_icon))
         }
     }
 }

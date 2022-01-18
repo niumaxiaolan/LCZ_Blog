@@ -73,7 +73,7 @@
                             android:layout_gravity="center_horizontal"
                             android:scaleType="centerCrop"
                             android:src="@drawable/ic_head_default"
-                            app:civ_border_color="@color/common_bg_white"
+                            app:civ_border_color="@color/teal_200"
                             app:civ_border_width="2dp" />
                     </androidx.cardview.widget.CardView>
 
