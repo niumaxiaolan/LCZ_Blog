@@ -3,7 +3,53 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:paddingHorizontal="@dimen/common_padding_10"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="44dp">
+        <!--搜索框区域-->
+        <LinearLayout
+            android:paddingHorizontal="@dimen/common_padding_10"
+            android:id="@+id/ll_search"
+            android:gravity="center_vertical"
+            android:background="@drawable/bg_search"
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="44dp">
+
+            <ImageView
+                android:src="@drawable/ic_search"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:visibility="visible"
+                android:imeOptions="actionSearch"
+                android:singleLine="true"
+                android:id="@+id/tv_search_tuijian"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/common_text_333333"
+                android:background="@null"
+                android:textSize="13sp"
+                android:textColorHint="#BABABA"
+                android:gravity="center_vertical"
+                android:hint="-输入博客标题，快速查询结果-"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+        <ImageView
+            app:tint="@color/common_theme"
+            android:src="@drawable/ic_add"
+            android:layout_width="30dp"
+            android:layout_height="30dp"/>
+    </LinearLayout>
 
     <View
         android:layout_width="match_parent"

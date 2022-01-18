@@ -23,7 +23,6 @@ import com.lcz.lcz_blog.module.blog.viewmodel.BlogListFragmentViewModel
 import com.lcz.lcz_blog.util.CommonLinearItemDecoration
 import com.lcz.lcz_blog.util.PageUtil
 import com.lcz.lcz_blog.util.RefreshUtil
-import com.lcz.lcz_blog.util.log.LogUtil
 import com.liuchuanzheng.baselib.util.lcz.LCZUtil
 import com.liuchuanzheng.baselib.util.lcz.toast
 import com.liuchuanzheng.lcz_wanandroid.base.BaseVMFragment
@@ -68,7 +67,7 @@ class BlogListFragment : BaseVMFragment<BlogListFragmentViewModel>() {
         loadService.showCallback(LoadingCallback::class.java)
         mViewBinding.recyclerView.setLayoutManager(LinearLayoutManager(requireActivity()))
         mViewBinding.recyclerView.addItemDecoration(
-            CommonLinearItemDecoration(dividerColor = Color.LTGRAY, dividerHeight = LCZUtil.dp2px(5f))
+            CommonLinearItemDecoration(dividerColor = Color.parseColor("#EEEEEE"), dividerHeight = LCZUtil.dp2px(1f))
         )
         mViewBinding.recyclerView.adapter = adapter
         mViewBinding.smartRefreshLayout.setEnableLoadMore(true)

@@ -9,11 +9,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
+import com.gyf.immersionbar.ImmersionBar
 import com.lcz.lcz_blog.R
 import com.lcz.lcz_blog.base.BaseVMActivity
 import com.lcz.lcz_blog.databinding.ActivityMainBinding
 import com.lcz.lcz_blog.module.blog.fragment.BlogListFragment
 import com.lcz.lcz_blog.module.mian.adapter.MyMainPagerAdapter
+import com.lcz.lcz_blog.module.user.fragment.MyFragment
 import com.lcz.lcz_blog.util.log.LogUtil
 import com.liuchuanzheng.lcz_wanandroid.base.BaseViewModel
 
@@ -32,7 +34,7 @@ class MainActivity : BaseVMActivity<BaseViewModel>() {
     }
     private fun setTabAndViewPager() {
         fragmentList.add(BlogListFragment())
-        fragmentList.add(BlogListFragment())
+        fragmentList.add(MyFragment())
         val myMainPagerAdapter = MyMainPagerAdapter(supportFragmentManager, fragmentList)
         mViewBinding.viewPager.setAdapter(myMainPagerAdapter)
         //设置不让滑动
@@ -58,7 +60,7 @@ class MainActivity : BaseVMActivity<BaseViewModel>() {
                         startAnimator(iv_image)
                     }
                 }
-//                updateStatuBar()
+                updateStatuBar()
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab) {
@@ -93,6 +95,24 @@ class MainActivity : BaseVMActivity<BaseViewModel>() {
                 tv_name.setTextColor(resources.getColor(R.color.common_text_unselect))
             }
             mViewBinding.tabLayout.addTab(tab)
+        }
+
+    }
+
+    private fun updateStatuBar() {
+
+        if(mViewBinding.tabLayout.selectedTabPosition == 0){
+            ImmersionBar.with(this) //状态栏颜色
+                .statusBarColor(R.color.common_bg_white) //状态栏文字颜色
+                .statusBarDarkFont(true)
+                .fitsSystemWindows(true) //使用该属性必须指定状态栏的颜色，不然状态栏透明，很难看. false表示布局嵌入状态栏。true表示布局避开状态栏
+                .init()
+        }else if(mViewBinding.tabLayout.selectedTabPosition == 1){
+            ImmersionBar.with(this) //状态栏颜色
+                .transparentStatusBar() //状态栏文字颜色
+                .statusBarDarkFont(true)
+                .fitsSystemWindows(false) //使用该属性必须指定状态栏的颜色，不然状态栏透明，很难看. false表示布局嵌入状态栏。true表示布局避开状态栏
+                .init()
         }
 
     }

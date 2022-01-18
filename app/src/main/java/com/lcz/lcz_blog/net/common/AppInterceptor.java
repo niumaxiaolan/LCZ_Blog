@@ -53,7 +53,7 @@ public class AppInterceptor implements Interceptor {
         if (!TextUtils.isEmpty(UserManager.INSTANCE.getUserInfo().getToken())) {
             //如果token为空.就不加这个头.否则后台就去校验,最终token失效
             String token = UserManager.INSTANCE.getUserInfo().getToken();
-            builder.addHeader("Token", token);
+            builder.addHeader("token", token);
         }
 
 

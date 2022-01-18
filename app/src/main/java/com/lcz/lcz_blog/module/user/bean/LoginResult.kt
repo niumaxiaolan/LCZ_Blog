@@ -14,6 +14,7 @@ data class LoginResult(
     var iconUrl: String = "", // null
     var id: Int = 0, // 3
     var password: String = "", // null
+    var token: String = "", // eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjMiLCJleHAiOjE2NDQxMTk4NDR9.m1z9zexHhXBRzhljIlRgVxi9TDG9lZ_2NgfZnrgPFAI
     var phone: String = "", // 18501231486
     var registerTime: String = "", // 2022-01-06 14:44:42
     var updateTime: String = "", // 2022-01-06 14:44:42

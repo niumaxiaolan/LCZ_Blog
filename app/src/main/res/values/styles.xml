@@ -8,4 +8,8 @@
         <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
         <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
     </style>
+    <declare-styleable name="MyItemView">
+        <attr name="MyItemView_title" format="reference|string" />
+        <attr name="MyItemView_icon" format="reference" />
+    </declare-styleable>
 </resources>

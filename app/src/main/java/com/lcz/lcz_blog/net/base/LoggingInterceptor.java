@@ -62,6 +62,7 @@ public final class LoggingInterceptor implements Interceptor {
         logMessage.append("protocol:" + protocol + "\n");
         logMessage.append("Method:" + request.method() + "\n");
         //请求的类名方法名和参数
+        logMessage.append("headers:.........start.........\n" + request.headers().toString());
         logMessage.append("headers:.........end.........\n");
         RequestBody requestBody = request.body();
         if (requestBody != null) {

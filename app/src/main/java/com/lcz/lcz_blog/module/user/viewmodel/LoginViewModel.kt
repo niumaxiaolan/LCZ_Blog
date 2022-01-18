@@ -37,6 +37,7 @@ class LoginViewModel : BaseViewModel() {
                             userInfo.phone = data.phone
                             userInfo.username = data.username
                             userInfo.icon = data.iconUrl
+                            userInfo.token = data.token
                             userInfo.id = data.id
                             UserManager.updateUserInfo(userInfo)
                         }
