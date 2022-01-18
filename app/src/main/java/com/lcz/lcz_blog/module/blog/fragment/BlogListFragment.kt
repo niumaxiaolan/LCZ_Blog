@@ -7,9 +7,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
+import com.jeremyliao.liveeventbus.LiveEventBus
 import com.kingja.loadsir.callback.Callback
 import com.kingja.loadsir.core.LoadService
 import com.kingja.loadsir.core.LoadSir
@@ -18,8 +20,10 @@ import com.lcz.lcz_blog.R
 import com.lcz.lcz_blog.callback.EmptyCallback
 import com.lcz.lcz_blog.callback.LoadingCallback
 import com.lcz.lcz_blog.databinding.FragmentBlogListBinding
+import com.lcz.lcz_blog.module.blog.activity.AddBlogActivity
 import com.lcz.lcz_blog.module.blog.bean.BlogPageListResult
 import com.lcz.lcz_blog.module.blog.viewmodel.BlogListFragmentViewModel
+import com.lcz.lcz_blog.module.bus.UpdateBlogEvent
 import com.lcz.lcz_blog.util.CommonLinearItemDecoration
 import com.lcz.lcz_blog.util.PageUtil
 import com.lcz.lcz_blog.util.RefreshUtil
@@ -81,8 +85,19 @@ class BlogListFragment : BaseVMFragment<BlogListFragmentViewModel>() {
             }
 
         })
+        mViewBinding.ivAdd.setOnClickListener {
+            AddBlogActivity.startActivity(requireContext())
+        }
+        initBus()
     }
-
+    private fun initBus() {
+        //监听事件总线的消息
+        LiveEventBus
+            .get(UpdateBlogEvent::class.java)
+            .observe(this, Observer {
+                getPageList(true)
+            })
+    }
     fun getPageList(isRefresh: Boolean) {
         mViewModel.getPageList(PageUtil.getNextServerPageBean(isRefresh, adapter.data.size))
             .observe(viewLifecycleOwner) {

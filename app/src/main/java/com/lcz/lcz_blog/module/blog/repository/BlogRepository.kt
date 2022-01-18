@@ -1,5 +1,6 @@
 package com.lcz.lcz_blog.module.blog.repository
 
+import com.lcz.lcz_blog.module.blog.bean.AddBlogRequest
 import com.lcz.lcz_blog.net.common.MainRetrofitManager
 import com.lcz.lcz_blog.util.PageBean
 import com.liuchuanzheng.lcz_wanandroid.base.BaseRepository
@@ -18,5 +19,8 @@ class BlogRepository : BaseRepository() {
 
     suspend fun register(phone: String, password: String) =
         safeGetData { MainRetrofitManager.apiService.register(phone, password) }
+
+    suspend fun add(request: AddBlogRequest) =
+        safeGetData { MainRetrofitManager.apiService.addBlog(request) }
 
 }

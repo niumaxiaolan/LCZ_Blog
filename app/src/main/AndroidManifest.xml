@@ -28,6 +28,9 @@
             android:launchMode="singleTask"
             android:name=".module.user.activity.RegisterActivity" />
         <activity android:name=".module.mian.activity.MainActivity" />
+        <activity
+            android:exported="true"
+            android:name=".module.blog.activity.AddBlogActivity" />
     </application>
 
 </manifest>
