@@ -11,6 +11,7 @@ import com.lcz.lcz_blog.module.mian.activity.MainActivity
 import com.lcz.lcz_blog.R
 import com.lcz.lcz_blog.databinding.ActivitySplashBinding
 import com.liuchuanzheng.lcz_wanandroid.base.BaseActivity
+import kotlin.random.Random
 
 /**
  * <pre>
@@ -85,7 +86,14 @@ class SplashActivity : BaseActivity() {
 
             if (AppManager.getSplashShowedStatus()) {
                 //展示过一次。就简化闪屏
-                startAnimal2()
+                //随机展示闪屏
+                var random = Random.nextInt(5)
+                if (random == 1) {
+                    startAnimal2()
+                }else{
+                    AppManager.analyseGoToMain(this@SplashActivity)
+                    finish()
+                }
             }
         }
 
