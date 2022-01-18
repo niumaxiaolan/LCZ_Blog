@@ -36,8 +36,8 @@ public class GlideUtil {
     private static float density = -1F;
 
     private static RequestOptions options = new RequestOptions()
-            .placeholder(R.mipmap.ic_launcher)
-            .error(R.mipmap.ic_launcher)
+            .placeholder(R.mipmap.logo)
+            .error(R.mipmap.logo)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .skipMemoryCache(true);
 
@@ -117,8 +117,8 @@ public class GlideUtil {
      */
     public static void loadRectImage(Context context, String url, ImageView imageView, float corner) {
         RequestOptions options = new RequestOptions()
-                .placeholder(R.mipmap.ic_launcher)
-                .error(R.mipmap.ic_launcher)
+                .placeholder(R.mipmap.logo)
+                .error(R.mipmap.logo)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .skipMemoryCache(true)
                 .bitmapTransform(new RoundedCorners(dip2px(context, corner)));
@@ -141,8 +141,8 @@ public class GlideUtil {
         RoundedCornersTransform transform = new RoundedCornersTransform(context, dip2px(context, corner));
         transform.setNeedCorner(leftTop, rightTop, leftBottom, rightBottom);
         RequestOptions options = new RequestOptions()
-                .placeholder(R.mipmap.ic_launcher)
-                .error(R.mipmap.ic_launcher)
+                .placeholder(R.mipmap.logo)
+                .error(R.mipmap.logo)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .skipMemoryCache(true)
                 .bitmapTransform(transform);
@@ -158,8 +158,8 @@ public class GlideUtil {
      */
     public static void loadRoundImage(Context context, String url, ImageView imageView) {
         RequestOptions options = new RequestOptions()
-                .placeholder(R.mipmap.ic_launcher)
-                .error(R.mipmap.ic_launcher)
+                .placeholder(R.mipmap.logo)
+                .error(R.mipmap.logo)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .skipMemoryCache(true)
                 .bitmapTransform(new CircleCrop());

@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:background="@color/common_bg_white"
             android:orientation="vertical"
-            android:paddingHorizontal="@dimen/common_padding_14">
+            android:paddingHorizontal="@dimen/common_padding_10">
 
 
             <LinearLayout

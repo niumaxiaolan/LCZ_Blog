@@ -45,6 +45,7 @@
 
         </LinearLayout>
         <ImageView
+            android:layout_marginStart="@dimen/common_padding_10"
             android:id="@+id/iv_add"
             app:tint="@color/common_theme"
             android:src="@drawable/ic_add"

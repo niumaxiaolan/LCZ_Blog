@@ -53,7 +53,7 @@ class MainActivity : BaseVMActivity<BaseViewModel>() {
                     val iv_image = customView.findViewById<ImageView>(R.id.iv_image)
                     tv_name.setTextColor(resources.getColor(R.color.common_theme))
                     if (0 == position) {
-                        iv_image.background = resources.getDrawable(R.drawable.logo_select)
+                        iv_image.background = resources.getDrawable(R.drawable.tab_home_select)
                         startAnimator(iv_image)
                     } else if (1 == position) {
                         iv_image.background = resources.getDrawable(R.drawable.tab_my_select)
@@ -71,7 +71,7 @@ class MainActivity : BaseVMActivity<BaseViewModel>() {
                     val iv_image = customView.findViewById<ImageView>(R.id.iv_image)
                     tv_name.setTextColor(resources.getColor(R.color.common_text_unselect))
                     if (0 == position) {
-                        iv_image.background = resources.getDrawable(R.drawable.tab_kuaiqicha_unselect)
+                        iv_image.background = resources.getDrawable(R.drawable.tab_home_unselect)
                     }  else if (1 == position) {
                         iv_image.background = resources.getDrawable(R.drawable.tab_my_unselect)
                     }
@@ -88,7 +88,7 @@ class MainActivity : BaseVMActivity<BaseViewModel>() {
             val iv_image = customView.findViewById<ImageView>(R.id.iv_image)
             tv_name.setText(titles.get(i))
             if (0 == i) {
-                iv_image.background = resources.getDrawable(R.drawable.logo_select)
+                iv_image.background = resources.getDrawable(R.drawable.tab_home_select)
                 tv_name.setTextColor(resources.getColor(R.color.common_theme))
             }  else if (1 == i) {
                 iv_image.background = resources.getDrawable(R.drawable.tab_my_unselect)

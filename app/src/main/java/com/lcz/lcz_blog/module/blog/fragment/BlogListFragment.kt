@@ -70,7 +70,7 @@ class BlogListFragment : BaseVMFragment<BlogListFragmentViewModel>() {
         loadService.showCallback(LoadingCallback::class.java)
         mViewBinding.recyclerView.setLayoutManager(LinearLayoutManager(requireActivity()))
         mViewBinding.recyclerView.addItemDecoration(
-            CommonLinearItemDecoration(dividerColor = Color.parseColor("#EEEEEE"), dividerHeight = LCZUtil.dp2px(1f))
+            CommonLinearItemDecoration(dividerColor = requireContext().getColor(R.color.common_theme), dividerHeight = LCZUtil.dp2px(0.5f))
         )
         mViewBinding.recyclerView.adapter = adapter
         adapter.setOnItemClickListener { adapter, view, position ->

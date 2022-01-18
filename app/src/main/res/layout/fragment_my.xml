@@ -11,14 +11,8 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/common_bg_white">
+        android:background="@color/common_theme">
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="-2dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/bg_my" />
 
         <LinearLayout
             android:id="@+id/ll_content_root"
@@ -26,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="?actionBarSize"
             android:orientation="vertical"
-            android:paddingHorizontal="@dimen/common_padding_14">
+            android:paddingHorizontal="@dimen/common_padding_10">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -125,14 +119,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:foreground="?android:attr/selectableItemBackground"
-                        android:paddingHorizontal="@dimen/common_padding_14"
-                        app:MyItemView_icon="@drawable/ic_collect"
+                        android:paddingHorizontal="@dimen/common_padding_10"
+                        app:MyItemView_icon="@drawable/ic_collected"
                         app:MyItemView_title="收藏" />
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginHorizontal="@dimen/common_padding_14"
+                        android:layout_marginHorizontal="@dimen/common_padding_10"
                         android:background="#EEEEEE" />
 
                     <com.lcz.lcz_blog.weight.MyItemView
@@ -140,39 +134,21 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:foreground="?android:attr/selectableItemBackground"
-                        android:paddingHorizontal="@dimen/common_padding_14"
-                        app:MyItemView_icon="@drawable/ic_foot_print"
-                        app:MyItemView_title="足迹" />
+                        android:paddingHorizontal="@dimen/common_padding_10"
+                        app:MyItemView_icon="@drawable/ic_add_list"
+                        app:MyItemView_title="我的发布" />
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginHorizontal="@dimen/common_padding_14"
+                        android:layout_marginHorizontal="@dimen/common_padding_10"
                         android:background="#EEEEEE" />
 
-                    <com.lcz.lcz_blog.weight.MyItemView
-                        android:id="@+id/miv_contact"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:foreground="?android:attr/selectableItemBackground"
-                        android:paddingHorizontal="@dimen/common_padding_14"
-                        app:MyItemView_icon="@drawable/ic_contact2"
-                        app:MyItemView_title="联系我们" />
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginHorizontal="@dimen/common_padding_14"
-                        android:background="#EEEEEE" />
 
-                    <com.lcz.lcz_blog.weight.MyItemView
-                        android:id="@+id/miv_setting"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:foreground="?android:attr/selectableItemBackground"
-                        android:paddingHorizontal="@dimen/common_padding_14"
-                        app:MyItemView_icon="@drawable/ic_setting"
-                        app:MyItemView_title="设置" />
+
+
+
 
                 </LinearLayout>
 

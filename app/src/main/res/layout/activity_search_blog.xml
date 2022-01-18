@@ -14,11 +14,11 @@
 
         <ImageView
             android:id="@+id/iv_back"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_centerVertical="true"
-            android:paddingLeft="@dimen/common_padding_14"
-            android:paddingRight="5dp"
+            android:paddingLeft="@dimen/common_padding_10"
+            android:paddingRight="@dimen/common_padding_10"
             android:src="@drawable/ic_back"
             tools:visibility="visible" />
 
@@ -26,8 +26,7 @@
             android:id="@+id/llSearch"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/common_padding_14"
-            android:layout_marginEnd="@dimen/common_padding_14"
+            android:layout_marginEnd="@dimen/common_padding_10"
             android:layout_weight="1"
             android:background="@drawable/shape_fff5f5f5_r2"
             android:gravity="center_vertical"

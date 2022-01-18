@@ -122,7 +122,7 @@ class SearchBlogActivity : BaseVMActivity<SearchBlogViewModel>() {
         loadService.showCallback(LoadingCallback::class.java)
         mViewBinding.recyclerView.setLayoutManager(LinearLayoutManager(activity))
         mViewBinding.recyclerView.addItemDecoration(
-            CommonLinearItemDecoration(dividerColor = Color.parseColor("#EEEEEE"), dividerHeight = LCZUtil.dp2px(1f))
+            CommonLinearItemDecoration(dividerColor = context.getColor(R.color.common_theme), dividerHeight = LCZUtil.dp2px(0.5f))
         )
         mViewBinding.recyclerView.adapter = adapter
         adapter.setOnItemClickListener { adapter, view, position ->
