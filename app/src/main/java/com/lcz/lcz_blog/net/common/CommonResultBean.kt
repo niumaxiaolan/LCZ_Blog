@@ -13,6 +13,7 @@ import com.lcz.lcz_blog.net.base.BaseResultBean
  */
 const val CODE_SUCCESS = 200
 const val CODE_FAIL = -404 //这不是网络返回的，是app网络请求时报错，自己统一定义的。比如json转换失败，超时等
+const val CODE_TOKEN_EXPIRED = 401 //token过期
 class CommonResultBean<T> : BaseResultBean {
 
     var code = CODE_SUCCESS

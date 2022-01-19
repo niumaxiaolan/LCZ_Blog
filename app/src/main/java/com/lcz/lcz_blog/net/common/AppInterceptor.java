@@ -1,14 +1,18 @@
 package com.lcz.lcz_blog.net.common;
 
 
+import android.content.Intent;
 import android.text.TextUtils;
 
 import com.dele.kuaiqicha.base.store.AppManager;
 import com.google.gson.Gson;
 import com.jeremyliao.liveeventbus.LiveEventBus;
+import com.lcz.lcz_blog.App;
 import com.lcz.lcz_blog.module.mian.activity.MainActivity;
+import com.lcz.lcz_blog.module.user.activity.LoginActivity;
 import com.lcz.lcz_blog.store.UserManager;
 import com.lcz.lcz_blog.util.log.LogUtil;
+import com.liuchuanzheng.lcz_wanandroid.base.Constant;
 
 import org.json.JSONObject;
 
@@ -90,12 +94,33 @@ public class AppInterceptor implements Interceptor {
                 String result = buffer.clone().readString(charset);
                 //获取到response的body的string字符串
                 //do something .... <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+                boolean tokenExpired = isTokenExpired(result);
+                if (tokenExpired) {
+                    UserManager.INSTANCE.cleanUserInfo();
+                    Intent intent = new Intent(App.Companion.getInstance(), LoginActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    App.Companion.getInstance().startActivity(intent);
+                }
             }
 
         }
         return response;
     }
 
+    private boolean isTokenExpired(String jsonString) {
+        try {
+            JSONObject json = new JSONObject(jsonString);
+            int code = json.optInt("code");
+            if (code == CommonResultBeanKt.CODE_TOKEN_EXPIRED) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            return false;
+        }
+
+    }
 
     static boolean isPlaintext(Buffer buffer) throws EOFException {
         try {
