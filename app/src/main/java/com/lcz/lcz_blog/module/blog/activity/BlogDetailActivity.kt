@@ -1,8 +1,12 @@
 package com.lcz.lcz_blog.module.blog.activity
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import androidx.core.app.ActivityCompat
+import androidx.core.app.ActivityOptionsCompat
 import com.dele.kuaiqicha.base.store.AppManager
 import com.lcz.lcz_blog.R
 import com.lcz.lcz_blog.base.BaseIntentBean
@@ -33,6 +37,23 @@ class BlogDetailActivity : BaseVMActivity<BlogDetailViewModel>() {
             val intent = Intent(context, BlogDetailActivity::class.java)
             intent.putExtra(Constant.IntentKey.IntentBean, intentBean)
             context.startActivity(intent)
+        }
+
+        /**
+         * view是需要共享效果的view
+         * 否则不会报错,但没有动画效果
+         */
+        fun startActivityForTransition(activity: Activity, intentBean: IntentBean, view_title: View, view_user: View, view_content: View) {
+            //共享元素跳转
+            val i = Intent(activity, BlogDetailActivity::class.java)
+            i.putExtra(Constant.IntentKey.IntentBean, intentBean)
+            val pair1 = androidx.core.util.Pair<View, String>(view_title, "SHARE_VIEW_1")
+            val pair2 = androidx.core.util.Pair<View, String>(view_user, "SHARE_VIEW_2")
+            val pair3 = androidx.core.util.Pair<View, String>(view_content, "SHARE_VIEW_3")
+            val optionsCompat: ActivityOptionsCompat =
+                ActivityOptionsCompat.makeSceneTransitionAnimation(activity, pair1, pair2, pair3)
+            // ActivityCompat是android支持库中用来适应不同android版本的
+            ActivityCompat.startActivity(activity, i, optionsCompat.toBundle())
         }
 
         data class IntentBean(var blogId: Int) : BaseIntentBean()

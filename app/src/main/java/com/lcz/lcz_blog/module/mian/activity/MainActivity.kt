@@ -17,6 +17,7 @@ import com.lcz.lcz_blog.module.blog.fragment.BlogListFragment
 import com.lcz.lcz_blog.module.mian.adapter.MyMainPagerAdapter
 import com.lcz.lcz_blog.module.user.fragment.MyFragment
 import com.lcz.lcz_blog.util.log.LogUtil
+import com.liuchuanzheng.baselib.util.lcz.toast
 import com.liuchuanzheng.lcz_wanandroid.base.BaseViewModel
 
 class MainActivity : BaseVMActivity<BaseViewModel>() {
@@ -24,6 +25,7 @@ class MainActivity : BaseVMActivity<BaseViewModel>() {
     private var titles: List<String> = listOf<String>("博客", "我的")
     val mViewBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     var animatorSet: AnimatorSet? = null
+    var lastPressTime = 0L
     override fun setContentView() {
         setContentView(mViewBinding.root)
     }
@@ -116,7 +118,15 @@ class MainActivity : BaseVMActivity<BaseViewModel>() {
         }
 
     }
-
+    override fun onBackPressed() {
+        val currentTimeMillis = System.currentTimeMillis()
+        if (currentTimeMillis - lastPressTime > 2000) {
+            toast("再按一次退出程序")
+            lastPressTime = currentTimeMillis
+        } else {
+            super.onBackPressed()
+        }
+    }
     private fun startAnimator(view: View) {
         // 动画
         if (animatorSet != null) {

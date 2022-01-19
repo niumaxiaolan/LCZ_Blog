@@ -70,11 +70,25 @@ class BlogListFragment : BaseVMFragment<BlogListFragmentViewModel>() {
         loadService.showCallback(LoadingCallback::class.java)
         mViewBinding.recyclerView.setLayoutManager(LinearLayoutManager(requireActivity()))
         mViewBinding.recyclerView.addItemDecoration(
-            CommonLinearItemDecoration(dividerColor = requireContext().getColor(R.color.common_theme), dividerHeight = LCZUtil.dp2px(0.5f))
+            CommonLinearItemDecoration(
+                dividerColor = requireContext().getColor(R.color.common_theme),
+                dividerHeight = LCZUtil.dp2px(0.5f)
+            )
         )
         mViewBinding.recyclerView.adapter = adapter
         adapter.setOnItemClickListener { adapter, view, position ->
-            BlogDetailActivity.startActivity(requireContext(), intentBean = BlogDetailActivity.Companion.IntentBean(this.adapter.getItem(position).id))
+            BlogDetailActivity.startActivity(
+                requireContext(),
+                intentBean = BlogDetailActivity.Companion.IntentBean(this.adapter.getItem(position).id)
+            )
+            /*//共享元素的跳转，太花哨了。
+            BlogDetailActivity.startActivityForTransition(
+                requireActivity(),
+                intentBean = BlogDetailActivity.Companion.IntentBean(this.adapter.getItem(position).id),
+                adapter.getViewByPosition(position,R.id.tv_title)!!,
+                adapter.getViewByPosition(position,R.id.ll_user)!!,
+                adapter.getViewByPosition(position,R.id.tv_content)!!
+            )*/
         }
         mViewBinding.smartRefreshLayout.setEnableLoadMore(true)
         mViewBinding.smartRefreshLayout.setOnRefreshLoadMoreListener(object : OnRefreshLoadMoreListener {
@@ -88,7 +102,7 @@ class BlogListFragment : BaseVMFragment<BlogListFragmentViewModel>() {
 
         })
         mViewBinding.ivAdd.setOnClickListener {
-            AddBlogActivity.startActivity(requireContext())
+            AddBlogActivity.startActivityForTransition(requireActivity(), mViewBinding.ivAdd)
         }
         mViewBinding.llSearch.setOnClickListener {
             SearchBlogActivity.startActivityForTransition(requireActivity(), mViewBinding.llSearch)

@@ -7,10 +7,12 @@
     android:orientation="vertical">
 
     <include
+
         android:id="@+id/layoutTitle"
         layout="@layout/common_toolbar" />
 
     <LinearLayout
+        android:transitionName="SHARE_VIEW_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/common_padding_10"
@@ -76,6 +78,7 @@
             android:paddingHorizontal="@dimen/common_padding_10">
 
             <TextView
+                android:transitionName="SHARE_VIEW_3"
                 android:id="@+id/tv_content"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

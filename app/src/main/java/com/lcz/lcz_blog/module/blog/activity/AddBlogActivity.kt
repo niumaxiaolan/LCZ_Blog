@@ -1,8 +1,12 @@
 package com.lcz.lcz_blog.module.blog.activity
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import androidx.core.app.ActivityCompat
+import androidx.core.app.ActivityOptionsCompat
 import com.dele.kuaiqicha.base.store.AppManager
 import com.lcz.lcz_blog.R
 import com.lcz.lcz_blog.base.BaseIntentBean
@@ -29,6 +33,19 @@ class AddBlogActivity : BaseVMActivity<AddBlogViewModel>() {
             context.startActivity(intent)
         }
 
+        /**
+         * view是需要共享效果的view
+         * 否则不会报错,但没有动画效果
+         */
+        fun startActivityForTransition(activity: Activity, view: View) {
+            //共享元素跳转
+            val i = Intent(activity, AddBlogActivity::class.java)
+            val pair1 = androidx.core.util.Pair<View, String>(view, "SHARE_VIEW_ADD")
+            val optionsCompat: ActivityOptionsCompat =
+                ActivityOptionsCompat.makeSceneTransitionAnimation(activity, pair1)
+            // ActivityCompat是android支持库中用来适应不同android版本的
+            ActivityCompat.startActivity(activity, i, optionsCompat.toBundle())
+        }
     }
 
 
@@ -64,7 +81,7 @@ class AddBlogActivity : BaseVMActivity<AddBlogViewModel>() {
 
     private fun initTitle() {
         mViewBinding.layoutTitle.ivBack.setOnClickListener {
-            finish()
+            finishAfterTransition()
         }
         mViewBinding.layoutTitle.tvTitle.text = "发布博客"
     }
