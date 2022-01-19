@@ -91,7 +91,7 @@
         android:layout_width="match_parent"
         android:layout_height="46dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/shape_2079e6_r4"
+        android:background="@drawable/shape_color_theme_r4"
         android:gravity="center"
         android:text="发布"
         android:textColor="#ffffffff"
