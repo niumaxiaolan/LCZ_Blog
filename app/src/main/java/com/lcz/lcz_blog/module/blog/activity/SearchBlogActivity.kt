@@ -11,6 +11,7 @@ import android.text.InputFilter
 import android.text.TextWatcher
 import android.view.View
 import android.view.inputmethod.EditorInfo
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityOptionsCompat
@@ -194,6 +195,13 @@ class SearchBlogActivity : BaseVMActivity<SearchBlogViewModel>() {
             holder.setText(R.id.tv_username, item.user.username)
             holder.setText(R.id.tv_date, item.createTime)
             GlideUtil.loadHead(context, item.user.iconUrl, holder.getView(R.id.iv_icon))
+            holder.setText(R.id.tv_collect_count, item.collectCount.toString())
+            var iv_collect = holder.getView<ImageView>(R.id.iv_collect)
+            if (item.isMyCollected == 0) {
+                iv_collect.setImageResource(R.drawable.ic_uncollect)
+            } else {
+                iv_collect.setImageResource(R.drawable.ic_collected)
+            }
         }
     }
 }

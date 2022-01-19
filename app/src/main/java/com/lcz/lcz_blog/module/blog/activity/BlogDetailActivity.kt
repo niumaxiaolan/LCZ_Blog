@@ -27,7 +27,7 @@ import com.lcz.lcz_blog.util.log.LogUtil
 import com.liuchuanzheng.baselib.util.lcz.toast
 import com.liuchuanzheng.lcz_wanandroid.base.BaseActivity
 import com.liuchuanzheng.lcz_wanandroid.base.Constant
-
+//这里不写收藏，点赞功能了，太麻烦。外边的列表已经实现了一遍了
 class BlogDetailActivity : BaseVMActivity<BlogDetailViewModel>() {
     val mViewBinding by lazy { ActivityBlogDetailBinding.inflate(layoutInflater) }
     var intentBean: IntentBean = IntentBean(0)

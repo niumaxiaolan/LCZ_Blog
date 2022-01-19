@@ -33,5 +33,17 @@ class BlogListFragmentViewModel : BaseViewModel() {
         return resultLiveData
     }
 
+    fun collect(blogId: Int, type: Int): MutableLiveData<CommonResultBean<*>> {
+        val resultLiveData = MutableLiveData<CommonResultBean<*>>()
+        launch(
+            workBlock = {
+                var result = repository.collect(blogId, type)
+                resultLiveData.value = result //因为列表的ui操作太复杂，所以这里不处理了，返给view层
+
+            }, false
+        )
+        return resultLiveData
+    }
+
 
 }

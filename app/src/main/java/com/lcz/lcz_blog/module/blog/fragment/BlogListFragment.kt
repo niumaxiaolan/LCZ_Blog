@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.BaseQuickAdapter
@@ -76,6 +77,7 @@ class BlogListFragment : BaseVMFragment<BlogListFragmentViewModel>() {
             )
         )
         mViewBinding.recyclerView.adapter = adapter
+        adapter.addChildClickViewIds(R.id.ll_collect)
         adapter.setOnItemClickListener { adapter, view, position ->
             BlogDetailActivity.startActivity(
                 requireContext(),
@@ -89,6 +91,17 @@ class BlogListFragment : BaseVMFragment<BlogListFragmentViewModel>() {
                 adapter.getViewByPosition(position,R.id.ll_user)!!,
                 adapter.getViewByPosition(position,R.id.tv_content)!!
             )*/
+        }
+        adapter.setOnItemChildClickListener { adapter, view, position ->
+            if (view.id == R.id.ll_collect) {
+                var item = this.adapter.getItem(position)
+                if (item.isMyCollected == 0) {
+                    net_collect(this.adapter.getItem(position).id, true)
+                } else {
+                    net_collect(this.adapter.getItem(position).id, false)
+                }
+
+            }
         }
         mViewBinding.smartRefreshLayout.setEnableLoadMore(true)
         mViewBinding.smartRefreshLayout.setOnRefreshLoadMoreListener(object : OnRefreshLoadMoreListener {
@@ -144,6 +157,35 @@ class BlogListFragment : BaseVMFragment<BlogListFragmentViewModel>() {
         }
     }
 
+    fun net_collect(blogId: Int, isCollect: Boolean) {
+        var type = 1
+        if (!isCollect) {
+            type = 2
+        }
+        mViewModel.collect(blogId, type)
+            .observe(viewLifecycleOwner) {
+                if (it.isServerResultOK()) {
+                    adapter.data.forEachIndexed { index, data ->
+                        if (data.id == blogId) {
+                            if (isCollect) {
+                                adapter.data.get(index).isMyCollected = 1
+                                adapter.data.get(index).collectCount++
+                                toast("收藏成功")
+                            } else {
+                                adapter.data.get(index).isMyCollected = 0
+                                adapter.data.get(index).collectCount--
+                                toast("已取消收藏")
+                            }
+                            adapter.notifyItemChanged(index)
+                        }
+                    }
+                } else {
+                    toast(it.msg)
+                }
+
+            }
+    }
+
     class MyAdapter(
         data: MutableList<BlogPageListResult.Data>?
     ) :
@@ -157,6 +199,13 @@ class BlogListFragment : BaseVMFragment<BlogListFragmentViewModel>() {
             holder.setText(R.id.tv_username, item.user.username)
             holder.setText(R.id.tv_date, item.createTime)
             GlideUtil.loadHead(context, item.user.iconUrl, holder.getView(R.id.iv_icon))
+            holder.setText(R.id.tv_collect_count, item.collectCount.toString())
+            var iv_collect = holder.getView<ImageView>(R.id.iv_collect)
+            if (item.isMyCollected == 0) {
+                iv_collect.setImageResource(R.drawable.ic_uncollect)
+            } else {
+                iv_collect.setImageResource(R.drawable.ic_collected)
+            }
         }
     }
 }

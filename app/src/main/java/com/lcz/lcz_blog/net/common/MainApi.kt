@@ -37,4 +37,7 @@ interface MainApi {
     @GET("/blog/queryById/{blogId}")
     suspend fun getBlogById(@Path("blogId") blogId: Int): CommonResultBean<BlogPageListResult.Data>
 
+    @POST("/blog/collect")
+    suspend fun collect(@Query("blogId") blogId: Int, @Query("type") type: Int): CommonResultBean<*>
+
 }

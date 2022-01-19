@@ -23,6 +23,8 @@ data class BlogPageListResult(
         var title: String = "", // string
         var updateTime: String = "", // 2022-01-17T09:49:19.393Z
         var user: User = User(),
+        var collectCount: Int =0,
+        var isMyCollected: Int = 0,
         var userId: Int = 0 // 0
     ) {
         data class User(

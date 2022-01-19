@@ -29,4 +29,7 @@ class BlogRepository : BaseRepository() {
     suspend fun getById(blogId: Int) =
         safeGetData { MainRetrofitManager.apiService.getBlogById(blogId) }
 
+    suspend fun collect(blogId: Int, type: Int) =
+        safeGetData { MainRetrofitManager.apiService.collect(blogId,type) }
+
 }
