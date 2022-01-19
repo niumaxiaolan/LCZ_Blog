@@ -1,39 +1,17 @@
 package com.lcz.lcz_blog.module.user.fragment
 
-import android.app.Activity
-import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.viewholder.BaseViewHolder
-import com.kingja.loadsir.callback.Callback
-import com.kingja.loadsir.core.LoadService
-import com.kingja.loadsir.core.LoadSir
-import com.kingja.loadsir.core.Transport
-import com.lcz.lcz_blog.R
-import com.lcz.lcz_blog.callback.EmptyCallback
-import com.lcz.lcz_blog.callback.LoadingCallback
-import com.lcz.lcz_blog.databinding.FragmentBlogListBinding
 import com.lcz.lcz_blog.databinding.FragmentMyBinding
-import com.lcz.lcz_blog.module.blog.bean.BlogPageListResult
-import com.lcz.lcz_blog.module.blog.viewmodel.BlogListFragmentViewModel
-import com.lcz.lcz_blog.module.mian.activity.MainActivity
+import com.lcz.lcz_blog.module.user.activity.LoginActivity
 import com.lcz.lcz_blog.module.user.viewmodel.MyFragmentViewModel
-import com.lcz.lcz_blog.util.CommonLinearItemDecoration
+import com.lcz.lcz_blog.store.UserManager
 import com.lcz.lcz_blog.util.GlideUtil
-import com.lcz.lcz_blog.util.PageUtil
-import com.lcz.lcz_blog.util.RefreshUtil
-import com.lcz.lcz_blog.util.log.LogUtil
-import com.liuchuanzheng.baselib.util.lcz.LCZUtil
 import com.liuchuanzheng.baselib.util.lcz.toast
 import com.liuchuanzheng.lcz_wanandroid.base.BaseVMFragment
-import com.scwang.smartrefresh.layout.api.RefreshLayout
-import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
 
 /**
  * <pre>
@@ -58,6 +36,13 @@ class MyFragment : BaseVMFragment<MyFragmentViewModel>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        mViewBinding.tvLogout.setOnClickListener {
+            toast("已退出账号")
+            UserManager.cleanUserInfo()
+            val intent = Intent(requireContext(), LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            startActivity(intent)
+        }
     }
 
     fun net_getUserInfo() {

@@ -34,6 +34,6 @@
         android:layout_height="38dp"
         android:background="@drawable/shape_bg_btn"
         android:text="我看够了"
-        android:textColor="@color/textColorPrimary"
+        android:textColor="@color/common_text_333333"
         android:textSize="14sp" />
 </RelativeLayout>

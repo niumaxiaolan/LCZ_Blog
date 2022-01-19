@@ -93,7 +93,8 @@
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:layout_marginTop="@dimen/common_padding_10"
         app:srlEnableLoadMore="false"
         app:srlEnablePureScrollMode="true"
@@ -145,7 +146,17 @@
                         android:background="#EEEEEE" />
 
 
-
+                    <TextView
+                        android:layout_marginHorizontal="@dimen/common_padding_10"
+                        android:id="@+id/tv_logout"
+                        android:layout_width="match_parent"
+                        android:layout_height="46dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/common_bg_gray"
+                        android:gravity="center"
+                        android:text="退出当前账号"
+                        android:textColor="@color/common_text2"
+                        android:textSize="16sp" />
 
 
 

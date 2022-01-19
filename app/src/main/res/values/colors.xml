@@ -8,9 +8,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="textColorPrimary">#1B1B1D</color>
-    <color name="textColorSecondary">#6B7178</color>
-    <color name="textColorThird">#9297A2</color>
 
     <!--凡是common开头的都是可统一替换的.相当于修改主题色.所以所有颜色尽量使用comm开头的-->
     <color name="common_text_unselect">#999999</color>
