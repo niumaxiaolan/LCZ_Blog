@@ -9,10 +9,7 @@ import androidx.lifecycle.Observer
 import com.jeremyliao.liveeventbus.LiveEventBus
 import com.lcz.lcz_blog.databinding.FragmentMyBinding
 import com.lcz.lcz_blog.module.bus.UpdataUserInfoEvent
-import com.lcz.lcz_blog.module.user.activity.ChangeIconActivity
-import com.lcz.lcz_blog.module.user.activity.ChangeUserNameActivity
-import com.lcz.lcz_blog.module.user.activity.LoginActivity
-import com.lcz.lcz_blog.module.user.activity.MyCollectBlogsActivity
+import com.lcz.lcz_blog.module.user.activity.*
 import com.lcz.lcz_blog.module.user.viewmodel.MyFragmentViewModel
 import com.lcz.lcz_blog.store.UserManager
 import com.lcz.lcz_blog.util.GlideUtil
@@ -57,6 +54,9 @@ class MyFragment : BaseVMFragment<MyFragmentViewModel>() {
         }
         mViewBinding.mivCollect.setOnClickListener {
             MyCollectBlogsActivity.startActivity(requireContext())
+        }
+        mViewBinding.mivMyAdded.setOnClickListener {
+            MyAddedBlogsActivity.startActivity(requireContext())
         }
         initBus()
     }

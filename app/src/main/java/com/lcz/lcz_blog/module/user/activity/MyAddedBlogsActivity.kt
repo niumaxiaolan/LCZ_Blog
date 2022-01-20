@@ -15,11 +15,11 @@ import com.kingja.loadsir.core.LoadSir
 import com.lcz.lcz_blog.R
 import com.lcz.lcz_blog.base.BaseVMActivity
 import com.lcz.lcz_blog.callback.LoadingCallback
-import com.lcz.lcz_blog.databinding.ActivityMyCollectedBlogsBinding
+import com.lcz.lcz_blog.databinding.ActivityMyAddedBlogsBinding
 import com.lcz.lcz_blog.module.blog.activity.BlogDetailActivity
 import com.lcz.lcz_blog.module.blog.bean.BlogPageListResult
-import com.lcz.lcz_blog.module.blog.viewmodel.MyCollectedBlogsViewModel
 import com.lcz.lcz_blog.module.bus.UpdateBlogEvent
+import com.lcz.lcz_blog.module.user.viewmodel.MyAddedBlogsViewModel
 import com.lcz.lcz_blog.util.CommonLinearItemDecoration
 import com.lcz.lcz_blog.util.GlideUtil
 import com.lcz.lcz_blog.util.PageUtil
@@ -29,14 +29,21 @@ import com.liuchuanzheng.baselib.util.lcz.toast
 import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
 
-class MyCollectBlogsActivity : BaseVMActivity<MyCollectedBlogsViewModel>() {
-    val mViewBinding by lazy { ActivityMyCollectedBlogsBinding.inflate(layoutInflater) }
+/**
+ * @author: 刘传政
+ * @date: 2022/1/20 0020 16:28
+ * QQ:1052374416
+ * 作用:我的发布
+ * 注意事项:
+ */
+class MyAddedBlogsActivity : BaseVMActivity<MyAddedBlogsViewModel>() {
+    val mViewBinding by lazy { ActivityMyAddedBlogsBinding.inflate(layoutInflater) }
     val adapter: MyAdapter by lazy { MyAdapter(null) }
     lateinit var loadService: LoadService<Any>
 
     companion object {
         fun startActivity(context: Context) {
-            val intent = Intent(context, MyCollectBlogsActivity::class.java)
+            val intent = Intent(context, MyAddedBlogsActivity::class.java)
             context.startActivity(intent)
         }
     }
@@ -54,7 +61,7 @@ class MyCollectBlogsActivity : BaseVMActivity<MyCollectedBlogsViewModel>() {
             mViewBinding.smartRefreshLayout,
             Callback.OnReloadListener {
                 loadService.showCallback(LoadingCallback::class.java)
-                net_query_collects(true)
+                net_query_my_added_blogs(true)
             })
         loadService.showCallback(LoadingCallback::class.java)
         mViewBinding.recyclerView.setLayoutManager(LinearLayoutManager(activity))
@@ -75,15 +82,22 @@ class MyCollectBlogsActivity : BaseVMActivity<MyCollectedBlogsViewModel>() {
         mViewBinding.smartRefreshLayout.setEnableLoadMore(true)
         mViewBinding.smartRefreshLayout.setOnRefreshLoadMoreListener(object : OnRefreshLoadMoreListener {
             override fun onRefresh(refreshLayout: RefreshLayout) {
-                net_query_collects(true)
+                net_query_my_added_blogs(true)
             }
 
             override fun onLoadMore(refreshLayout: RefreshLayout) {
-                net_query_collects(false)
+                net_query_my_added_blogs(false)
             }
         })
         initBus()
-        net_query_collects(true)
+        net_query_my_added_blogs(true)
+    }
+
+    private fun initTitle() {
+        mViewBinding.layoutTitle.ivBack.setOnClickListener {
+            finish()
+        }
+        mViewBinding.layoutTitle.tvTitle.text = "我的发布"
     }
 
     private fun initBus() {
@@ -91,15 +105,8 @@ class MyCollectBlogsActivity : BaseVMActivity<MyCollectedBlogsViewModel>() {
         LiveEventBus
             .get(UpdateBlogEvent::class.java)
             .observe(this, Observer {
-                net_query_collects(true)
+                net_query_my_added_blogs(true)
             })
-    }
-
-    private fun initTitle() {
-        mViewBinding.layoutTitle.ivBack.setOnClickListener {
-            finish()
-        }
-        mViewBinding.layoutTitle.tvTitle.text = "我的收藏"
     }
 
     override fun observeViewModel() {
@@ -110,11 +117,11 @@ class MyCollectBlogsActivity : BaseVMActivity<MyCollectedBlogsViewModel>() {
         }
     }
 
-    fun net_query_collects(isRefresh: Boolean) {
+    fun net_query_my_added_blogs(isRefresh: Boolean) {
         if (isRefresh) {
             mViewBinding.smartRefreshLayout.setNoMoreData(false)
         }
-        mViewModel.query_collects(
+        mViewModel.query_my_added_blogs(
             PageUtil.getNextServerPageBean(isRefresh, adapter.data.size)
         )
             .observe(this) {

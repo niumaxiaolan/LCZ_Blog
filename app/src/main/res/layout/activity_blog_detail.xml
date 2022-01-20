@@ -12,11 +12,11 @@
         layout="@layout/common_toolbar" />
 
     <LinearLayout
-        android:transitionName="SHARE_VIEW_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/common_padding_10"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:transitionName="SHARE_VIEW_2">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -34,10 +34,10 @@
                 app:civ_border_width="1dp" />
 
             <TextView
-                android:layout_marginStart="@dimen/common_padding_10"
                 android:id="@+id/tv_username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/common_padding_10"
                 android:maxLines="1"
                 android:textColor="#ff2079e6"
                 android:textSize="13sp"
@@ -78,16 +78,30 @@
             android:paddingHorizontal="@dimen/common_padding_10">
 
             <TextView
-                android:transitionName="SHARE_VIEW_3"
                 android:id="@+id/tv_content"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
-                tools:text="内容"
                 android:textColor="@color/common_text_333333"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:transitionName="SHARE_VIEW_3"
+                tools:text="内容" />
 
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+
+    <TextView
+        android:id="@+id/tv_edit"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_margin="@dimen/common_padding_10"
+        android:background="@drawable/shape_color_theme_r4"
+        android:gravity="center"
+        android:text="编辑"
+        android:textColor="#ffffffff"
+        android:textSize="16sp"
+        android:transitionName="SHARE_VIEW_ADD"
+        android:visibility="gone"
+        tools:visibility="visible" />
 </LinearLayout>

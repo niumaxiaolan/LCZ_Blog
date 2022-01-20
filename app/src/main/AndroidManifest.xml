@@ -37,6 +37,8 @@
         <activity android:name=".module.user.activity.ChangeIconActivity" />
         <activity android:name=".module.user.activity.ChangeUserNameActivity" />
         <activity android:name=".module.user.activity.MyCollectBlogsActivity" />
+        <activity android:name=".module.user.activity.MyAddedBlogsActivity" />
+        <activity android:name=".module.blog.activity.EditBlogActivity" />
     </application>
 
 </manifest>

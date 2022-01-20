@@ -7,26 +7,17 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityOptionsCompat
-import com.dele.kuaiqicha.base.store.AppManager
-import com.lcz.lcz_blog.R
+import androidx.lifecycle.Observer
+import com.jeremyliao.liveeventbus.LiveEventBus
 import com.lcz.lcz_blog.base.BaseIntentBean
 import com.lcz.lcz_blog.base.BaseVMActivity
-import com.lcz.lcz_blog.databinding.ActivityAddBlogBinding
 import com.lcz.lcz_blog.databinding.ActivityBlogDetailBinding
-import com.lcz.lcz_blog.databinding.ActivityLoginBinding
-import com.lcz.lcz_blog.databinding.ActivityRegisterBinding
-import com.lcz.lcz_blog.module.blog.viewmodel.AddBlogViewModel
 import com.lcz.lcz_blog.module.blog.viewmodel.BlogDetailViewModel
-import com.lcz.lcz_blog.module.mian.activity.MainActivity
-import com.lcz.lcz_blog.module.user.activity.LoginActivity
-import com.lcz.lcz_blog.module.user.activity.RegisterActivity
-import com.lcz.lcz_blog.module.user.viewmodel.LoginViewModel
+import com.lcz.lcz_blog.module.bus.UpdateBlogEvent
 import com.lcz.lcz_blog.store.UserManager
 import com.lcz.lcz_blog.util.GlideUtil
-import com.lcz.lcz_blog.util.log.LogUtil
-import com.liuchuanzheng.baselib.util.lcz.toast
-import com.liuchuanzheng.lcz_wanandroid.base.BaseActivity
 import com.liuchuanzheng.lcz_wanandroid.base.Constant
+
 //这里不写收藏，点赞功能了，太麻烦。外边的列表已经实现了一遍了
 class BlogDetailActivity : BaseVMActivity<BlogDetailViewModel>() {
     val mViewBinding by lazy { ActivityBlogDetailBinding.inflate(layoutInflater) }
@@ -43,7 +34,13 @@ class BlogDetailActivity : BaseVMActivity<BlogDetailViewModel>() {
          * view是需要共享效果的view
          * 否则不会报错,但没有动画效果
          */
-        fun startActivityForTransition(activity: Activity, intentBean: IntentBean, view_title: View, view_user: View, view_content: View) {
+        fun startActivityForTransition(
+            activity: Activity,
+            intentBean: IntentBean,
+            view_title: View,
+            view_user: View,
+            view_content: View
+        ) {
             //共享元素跳转
             val i = Intent(activity, BlogDetailActivity::class.java)
             i.putExtra(Constant.IntentKey.IntentBean, intentBean)
@@ -70,10 +67,23 @@ class BlogDetailActivity : BaseVMActivity<BlogDetailViewModel>() {
         parseIntent<IntentBean>()?.apply {
             intentBean = this
         }
+        initBus()
         mViewBinding.layoutTitle.ivBack.setOnClickListener {
             finish()
         }
+        mViewBinding.tvEdit.setOnClickListener {
+            EditBlogActivity.startActivity(context, EditBlogActivity.Companion.IntentBean(intentBean.blogId))
+        }
         net_getDetail()
+    }
+
+    private fun initBus() {
+        //监听事件总线的消息
+        LiveEventBus
+            .get(UpdateBlogEvent::class.java)
+            .observe(this, Observer {
+                net_getDetail()
+            })
     }
 
     fun net_getDetail() {
@@ -85,6 +95,11 @@ class BlogDetailActivity : BaseVMActivity<BlogDetailViewModel>() {
                     mViewBinding.tvUsername.text = it.user.username
                     mViewBinding.tvDate.text = it.createTime
                     mViewBinding.tvContent.text = it.content
+                    if (it.userId == UserManager.getUserInfo().id) {
+                        mViewBinding.tvEdit.visibility = View.VISIBLE
+                    } else {
+                        mViewBinding.tvEdit.visibility = View.GONE
+                    }
 
                 }
 

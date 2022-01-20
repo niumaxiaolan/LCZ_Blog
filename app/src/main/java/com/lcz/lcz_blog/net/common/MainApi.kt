@@ -2,6 +2,7 @@ package com.lcz.lcz_blog.net.common
 
 import com.lcz.lcz_blog.module.blog.bean.AddBlogRequest
 import com.lcz.lcz_blog.module.blog.bean.BlogPageListResult
+import com.lcz.lcz_blog.module.blog.bean.EditBlogRequest
 import com.lcz.lcz_blog.module.user.bean.LoginResult
 import retrofit2.http.*
 
@@ -41,8 +42,20 @@ interface MainApi {
         @Query("pageSize") pageSize: Int,
     ): CommonResultBean<BlogPageListResult>
 
+    @POST("/blog/query_my_added")
+    suspend fun query_my_added_blogs(
+        @Query("pageNo") pageNo: Int,
+        @Query("pageSize") pageSize: Int,
+    ): CommonResultBean<BlogPageListResult>
+
     @POST("/blog/add")
     suspend fun addBlog(@Body request: AddBlogRequest): CommonResultBean<Int>
+
+    @POST("/blog/update")
+    suspend fun updateBlog(@Body request: EditBlogRequest): CommonResultBean<*>
+
+    @POST("/blog/delete/{blogId}")
+    suspend fun deleteBlog(@Path("blogId") blogId: Int): CommonResultBean<*>
 
     @GET("/blog/queryById/{blogId}")
     suspend fun getBlogById(@Path("blogId") blogId: Int): CommonResultBean<BlogPageListResult.Data>

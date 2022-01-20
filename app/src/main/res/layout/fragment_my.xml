@@ -131,7 +131,7 @@
                         android:background="#EEEEEE" />
 
                     <com.lcz.lcz_blog.weight.MyItemView
-                        android:id="@+id/miv_foot_print"
+                        android:id="@+id/miv_my_added"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:foreground="?android:attr/selectableItemBackground"
