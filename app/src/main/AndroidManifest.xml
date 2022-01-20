@@ -35,6 +35,7 @@
         <activity android:name=".module.blog.activity.SearchBlogActivity" />
         <activity android:name=".module.blog.activity.BlogDetailActivity" />
         <activity android:name=".module.user.activity.ChangeIconActivity" />
+        <activity android:name=".module.user.activity.ChangeUserNameActivity" />
     </application>
 
 </manifest>

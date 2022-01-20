@@ -3,8 +3,6 @@ package com.lcz.lcz_blog.net.common
 import com.lcz.lcz_blog.module.blog.bean.AddBlogRequest
 import com.lcz.lcz_blog.module.blog.bean.BlogPageListResult
 import com.lcz.lcz_blog.module.user.bean.LoginResult
-import com.lcz.lcz_blog.net.common.CommonResultBean
-import io.reactivex.Observable
 import retrofit2.http.*
 
 interface MainApi {
@@ -20,6 +18,9 @@ interface MainApi {
 
     @POST("/user/icon_url")
     suspend fun iconUrl(@Query("iconUrl") iconUrl: String): CommonResultBean<*>
+
+    @POST("/user/change_username")
+    suspend fun change_username(@Query("username") username: String): CommonResultBean<*>
 
     @POST("/blog/query_page")
     suspend fun blogPageList(

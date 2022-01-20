@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/layoutTitle"
+        layout="@layout/common_toolbar" />
+
+    <LinearLayout
+        android:paddingHorizontal="@dimen/common_padding_10"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/et_username"
+            android:textSize="15sp"
+            android:hint="输入用户名"
+            android:maxLength="15"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/tv_save"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:background="@drawable/shape_color_theme_r4"
+            android:gravity="center"
+            android:text="保存"
+            android:textColor="#ffffffff"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+
+</LinearLayout>

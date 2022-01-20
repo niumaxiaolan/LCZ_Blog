@@ -9,8 +9,8 @@ import androidx.lifecycle.Observer
 import com.jeremyliao.liveeventbus.LiveEventBus
 import com.lcz.lcz_blog.databinding.FragmentMyBinding
 import com.lcz.lcz_blog.module.bus.UpdataUserInfoEvent
-import com.lcz.lcz_blog.module.bus.UpdateBlogEvent
 import com.lcz.lcz_blog.module.user.activity.ChangeIconActivity
+import com.lcz.lcz_blog.module.user.activity.ChangeUserNameActivity
 import com.lcz.lcz_blog.module.user.activity.LoginActivity
 import com.lcz.lcz_blog.module.user.viewmodel.MyFragmentViewModel
 import com.lcz.lcz_blog.store.UserManager
@@ -42,7 +42,10 @@ class MyFragment : BaseVMFragment<MyFragmentViewModel>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mViewBinding.ivHead.setOnClickListener {
-            ChangeIconActivity.startActivityForTransition(requireActivity(),mViewBinding.ivHead)
+            ChangeIconActivity.startActivityForTransition(requireActivity(), mViewBinding.ivHead)
+        }
+        mViewBinding.tvUsername.setOnClickListener {
+            ChangeUserNameActivity.startActivity(requireActivity())
         }
         mViewBinding.tvLogout.setOnClickListener {
             toast("已退出账号")
