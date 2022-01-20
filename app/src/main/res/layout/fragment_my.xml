@@ -122,7 +122,7 @@
                         android:foreground="?android:attr/selectableItemBackground"
                         android:paddingHorizontal="@dimen/common_padding_10"
                         app:MyItemView_icon="@drawable/ic_collected"
-                        app:MyItemView_title="收藏" />
+                        app:MyItemView_title="我的收藏" />
 
                     <View
                         android:layout_width="match_parent"

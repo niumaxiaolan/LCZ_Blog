@@ -20,6 +20,9 @@ class BlogRepository : BaseRepository() {
     suspend fun searchBlog(page: PageBean, keywords: String) =
         safeGetData { MainRetrofitManager.apiService.searchBlog(page.pageNo, page.pageSize, keywords) }
 
+    suspend fun query_collects(page: PageBean) =
+        safeGetData { MainRetrofitManager.apiService.query_collects(page.pageNo, page.pageSize) }
+
     suspend fun register(phone: String, password: String) =
         safeGetData { MainRetrofitManager.apiService.register(phone, password) }
 
@@ -30,6 +33,6 @@ class BlogRepository : BaseRepository() {
         safeGetData { MainRetrofitManager.apiService.getBlogById(blogId) }
 
     suspend fun collect(blogId: Int, type: Int) =
-        safeGetData { MainRetrofitManager.apiService.collect(blogId,type) }
+        safeGetData { MainRetrofitManager.apiService.collect(blogId, type) }
 
 }

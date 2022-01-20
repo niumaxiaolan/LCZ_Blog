@@ -35,6 +35,12 @@ interface MainApi {
         @Query("keywords") keywords: String
     ): CommonResultBean<BlogPageListResult>
 
+    @POST("/blog/query_collects")
+    suspend fun query_collects(
+        @Query("pageNo") pageNo: Int,
+        @Query("pageSize") pageSize: Int,
+    ): CommonResultBean<BlogPageListResult>
+
     @POST("/blog/add")
     suspend fun addBlog(@Body request: AddBlogRequest): CommonResultBean<Int>
 

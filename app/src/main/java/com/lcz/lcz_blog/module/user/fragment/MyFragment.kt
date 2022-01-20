@@ -12,6 +12,7 @@ import com.lcz.lcz_blog.module.bus.UpdataUserInfoEvent
 import com.lcz.lcz_blog.module.user.activity.ChangeIconActivity
 import com.lcz.lcz_blog.module.user.activity.ChangeUserNameActivity
 import com.lcz.lcz_blog.module.user.activity.LoginActivity
+import com.lcz.lcz_blog.module.user.activity.MyCollectBlogsActivity
 import com.lcz.lcz_blog.module.user.viewmodel.MyFragmentViewModel
 import com.lcz.lcz_blog.store.UserManager
 import com.lcz.lcz_blog.util.GlideUtil
@@ -53,6 +54,9 @@ class MyFragment : BaseVMFragment<MyFragmentViewModel>() {
             val intent = Intent(requireContext(), LoginActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intent)
+        }
+        mViewBinding.mivCollect.setOnClickListener {
+            MyCollectBlogsActivity.startActivity(requireContext())
         }
         initBus()
     }
