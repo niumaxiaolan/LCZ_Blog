@@ -18,6 +18,9 @@ interface MainApi {
     @POST("/user/register")
     suspend fun register(@Query("phone") phone: String, @Query("password") password: String): CommonResultBean<*>
 
+    @POST("/user/icon_url")
+    suspend fun iconUrl(@Query("iconUrl") iconUrl: String): CommonResultBean<*>
+
     @POST("/blog/query_page")
     suspend fun blogPageList(
         @Query("pageNo") pageNo: Int,

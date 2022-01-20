@@ -5,7 +5,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import com.jeremyliao.liveeventbus.LiveEventBus
 import com.lcz.lcz_blog.databinding.FragmentMyBinding
+import com.lcz.lcz_blog.module.bus.UpdataUserInfoEvent
+import com.lcz.lcz_blog.module.bus.UpdateBlogEvent
+import com.lcz.lcz_blog.module.user.activity.ChangeIconActivity
 import com.lcz.lcz_blog.module.user.activity.LoginActivity
 import com.lcz.lcz_blog.module.user.viewmodel.MyFragmentViewModel
 import com.lcz.lcz_blog.store.UserManager
@@ -36,6 +41,9 @@ class MyFragment : BaseVMFragment<MyFragmentViewModel>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        mViewBinding.ivHead.setOnClickListener {
+            ChangeIconActivity.startActivityForTransition(requireActivity(),mViewBinding.ivHead)
+        }
         mViewBinding.tvLogout.setOnClickListener {
             toast("已退出账号")
             UserManager.cleanUserInfo()
@@ -43,14 +51,23 @@ class MyFragment : BaseVMFragment<MyFragmentViewModel>() {
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intent)
         }
+        initBus()
     }
 
     fun net_getUserInfo() {
-        mViewModel.getUserInfo().observe(this) {
+        mViewModel.getUserInfo().observe(viewLifecycleOwner) {
             if (it.isServerResultOK()) {
                 mViewBinding.tvUsername.text = it.data?.username
                 GlideUtil.loadHead(activity, it.data?.iconUrl, mViewBinding.ivHead)
             }
         }
+    }
+    private fun initBus() {
+        //监听事件总线的消息
+        LiveEventBus
+            .get(UpdataUserInfoEvent::class.java)
+            .observe(this, Observer {
+                net_getUserInfo()
+            })
     }
 }

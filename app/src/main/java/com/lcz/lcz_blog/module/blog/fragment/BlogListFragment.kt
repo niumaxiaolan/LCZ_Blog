@@ -26,6 +26,7 @@ import com.lcz.lcz_blog.module.blog.activity.BlogDetailActivity
 import com.lcz.lcz_blog.module.blog.activity.SearchBlogActivity
 import com.lcz.lcz_blog.module.blog.bean.BlogPageListResult
 import com.lcz.lcz_blog.module.blog.viewmodel.BlogListFragmentViewModel
+import com.lcz.lcz_blog.module.bus.UpdataUserInfoEvent
 import com.lcz.lcz_blog.module.bus.UpdateBlogEvent
 import com.lcz.lcz_blog.util.CommonLinearItemDecoration
 import com.lcz.lcz_blog.util.GlideUtil
@@ -127,6 +128,11 @@ class BlogListFragment : BaseVMFragment<BlogListFragmentViewModel>() {
         //监听事件总线的消息
         LiveEventBus
             .get(UpdateBlogEvent::class.java)
+            .observe(this, Observer {
+                getPageList(true)
+            })
+        LiveEventBus
+            .get(UpdataUserInfoEvent::class.java)
             .observe(this, Observer {
                 getPageList(true)
             })

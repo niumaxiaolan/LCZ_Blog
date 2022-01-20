@@ -8,7 +8,6 @@ import com.lcz.lcz_blog.net.common.CommonResultBean
 import com.lcz.lcz_blog.store.UserManager
 import com.liuchuanzheng.baselib.util.lcz.toast
 import com.liuchuanzheng.lcz_wanandroid.base.BaseViewModel
-import com.lcz.lcz_blog.module.blog.repository.BlogRepository
 import com.liuchuanzheng.lcz_wanandroid.module.home.repository.UserRepository
 
 /**

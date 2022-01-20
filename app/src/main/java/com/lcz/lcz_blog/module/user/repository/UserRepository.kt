@@ -1,5 +1,6 @@
 package com.liuchuanzheng.lcz_wanandroid.module.home.repository
 
+import com.lcz.lcz_blog.module.user.activity.ChangeIconActivity
 import com.lcz.lcz_blog.net.common.MainRetrofitManager
 import com.liuchuanzheng.lcz_wanandroid.base.BaseRepository
 
@@ -20,5 +21,8 @@ class UserRepository : BaseRepository() {
 
     suspend fun userInfo() =
         safeGetData { MainRetrofitManager.apiService.userInfo() }
+
+    suspend fun changeIcon(iconUrl: String) =
+        safeGetData { MainRetrofitManager.apiService.iconUrl(iconUrl) }
 
 }
