@@ -5,11 +5,11 @@ import android.content.Intent
 import android.os.Bundle
 import com.lcz.lcz_blog.base.BaseIntentBean
 import com.lcz.lcz_blog.base.BaseVMActivity
+import com.lcz.lcz_blog.base.Constant
 import com.lcz.lcz_blog.databinding.ActivityEditBlogBinding
 import com.lcz.lcz_blog.module.blog.bean.EditBlogRequest
 import com.lcz.lcz_blog.module.blog.viewmodel.EditBlogViewModel
 import com.liuchuanzheng.baselib.util.lcz.toast
-import com.liuchuanzheng.lcz_wanandroid.base.Constant
 
 class EditBlogActivity : BaseVMActivity<EditBlogViewModel>() {
     val mViewBinding by lazy { ActivityEditBlogBinding.inflate(layoutInflater) }

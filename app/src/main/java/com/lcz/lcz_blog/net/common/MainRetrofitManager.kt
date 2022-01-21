@@ -1,7 +1,7 @@
 package com.lcz.lcz_blog.net.common
 
+import com.lcz.lcz_blog.base.Constant
 import com.lcz.lcz_blog.net.base.RetrofitManager
-import com.liuchuanzheng.lcz_wanandroid.base.Constant
 import okhttp3.Interceptor
 
 /**

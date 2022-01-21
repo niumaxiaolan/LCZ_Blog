@@ -11,12 +11,12 @@ import androidx.lifecycle.Observer
 import com.jeremyliao.liveeventbus.LiveEventBus
 import com.lcz.lcz_blog.base.BaseIntentBean
 import com.lcz.lcz_blog.base.BaseVMActivity
+import com.lcz.lcz_blog.base.Constant
 import com.lcz.lcz_blog.databinding.ActivityBlogDetailBinding
 import com.lcz.lcz_blog.module.blog.viewmodel.BlogDetailViewModel
 import com.lcz.lcz_blog.module.bus.UpdateBlogEvent
 import com.lcz.lcz_blog.store.UserManager
 import com.lcz.lcz_blog.util.GlideUtil
-import com.liuchuanzheng.lcz_wanandroid.base.Constant
 
 //这里不写收藏，点赞功能了，太麻烦。外边的列表已经实现了一遍了
 class BlogDetailActivity : BaseVMActivity<BlogDetailViewModel>() {

@@ -12,7 +12,7 @@ android {
         minSdk 23
         targetSdk 31
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -30,9 +30,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    buildFeatures{
+    buildFeatures {
         //启动viewbinding.主要用来代替butterknife
-        viewBinding= true
+        viewBinding = true
     }
 }
 

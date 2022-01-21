@@ -3,13 +3,13 @@ package com.liuchuanzheng.lcz_wanandroid.base
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.gyf.immersionbar.ImmersionBar
 import com.lcz.lcz_blog.R
 import com.lcz.lcz_blog.base.BaseIntentBean
+import com.lcz.lcz_blog.base.Constant
 import com.lcz.lcz_blog.util.dialog.DialogUtil
 import com.lcz.lcz_blog.util.log.LogUtil
 

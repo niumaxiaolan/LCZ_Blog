@@ -5,7 +5,7 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 
 import com.lcz.lcz_blog.BuildConfig;
-import com.liuchuanzheng.lcz_wanandroid.base.Constant;
+import com.lcz.lcz_blog.base.Constant;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.FormatStrategy;
 import com.orhanobut.logger.Logger;

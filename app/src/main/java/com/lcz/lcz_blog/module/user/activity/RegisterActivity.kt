@@ -5,16 +5,12 @@ import android.content.Intent
 import android.os.Bundle
 import com.lcz.lcz_blog.base.BaseIntentBean
 import com.lcz.lcz_blog.base.BaseVMActivity
-import com.lcz.lcz_blog.databinding.ActivityLoginBinding
+import com.lcz.lcz_blog.base.Constant
 import com.lcz.lcz_blog.databinding.ActivityRegisterBinding
-import com.lcz.lcz_blog.databinding.ActivitySplashBinding
-import com.lcz.lcz_blog.module.mian.activity.MainActivity
 import com.lcz.lcz_blog.module.user.viewmodel.RegisterViewModel
-import com.lcz.lcz_blog.store.UserManager
+import com.lcz.lcz_blog.util.StringUtils
 import com.lcz.lcz_blog.util.log.LogUtil
 import com.liuchuanzheng.baselib.util.lcz.toast
-import com.liuchuanzheng.lcz_wanandroid.base.BaseActivity
-import com.liuchuanzheng.lcz_wanandroid.base.Constant
 
 class RegisterActivity : BaseVMActivity<RegisterViewModel>() {
     val mViewBinding by lazy { ActivityRegisterBinding.inflate(layoutInflater) }
@@ -47,20 +43,22 @@ class RegisterActivity : BaseVMActivity<RegisterViewModel>() {
             mViewBinding.etPassword.setText("")
         }
         //为了方便调试，预填一些数据
-        val userInfo = UserManager.getUserInfo()
+        /*val userInfo = UserManager.getUserInfo()
         if (userInfo.phone.isNullOrEmpty()) {
             mViewBinding.etPhone.setText("18501231486")
         }else{
             mViewBinding.etPhone.setText(userInfo.phone)
         }
-        mViewBinding.etPassword.setText("111111")
+        mViewBinding.etPassword.setText("111111")*/
 
         mViewBinding.tvRegister.setOnClickListener {
             val phone = mViewBinding.etPhone.text.toString()
             val password = mViewBinding.etPassword.text.toString()
             when {
                 phone.isEmpty() -> toast("手机号不能为空")
+                !StringUtils.isMobilePhone(phone) -> toast("手机号格式错误")
                 password.isEmpty() -> toast("密码不能为空")
+                password.length != 6 -> toast("密码需要6位")
                 else -> {
                     register(phone, password)
                 }

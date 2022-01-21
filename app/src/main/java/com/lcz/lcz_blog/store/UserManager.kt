@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import com.blankj.utilcode.util.GsonUtils
 import com.blankj.utilcode.util.SPUtils
 import com.google.gson.Gson
-import com.liuchuanzheng.lcz_wanandroid.base.Constant
+import com.lcz.lcz_blog.base.Constant
 
 object UserManager {
 

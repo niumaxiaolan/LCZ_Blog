@@ -7,22 +7,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityOptionsCompat
-import com.dele.kuaiqicha.base.store.AppManager
-import com.lcz.lcz_blog.R
-import com.lcz.lcz_blog.base.BaseIntentBean
 import com.lcz.lcz_blog.base.BaseVMActivity
 import com.lcz.lcz_blog.databinding.ActivityAddBlogBinding
-import com.lcz.lcz_blog.databinding.ActivityLoginBinding
-import com.lcz.lcz_blog.databinding.ActivityRegisterBinding
 import com.lcz.lcz_blog.module.blog.viewmodel.AddBlogViewModel
-import com.lcz.lcz_blog.module.mian.activity.MainActivity
-import com.lcz.lcz_blog.module.user.activity.RegisterActivity
-import com.lcz.lcz_blog.module.user.viewmodel.LoginViewModel
-import com.lcz.lcz_blog.store.UserManager
-import com.lcz.lcz_blog.util.log.LogUtil
 import com.liuchuanzheng.baselib.util.lcz.toast
-import com.liuchuanzheng.lcz_wanandroid.base.BaseActivity
-import com.liuchuanzheng.lcz_wanandroid.base.Constant
 
 class AddBlogActivity : BaseVMActivity<AddBlogViewModel>() {
     val mViewBinding by lazy { ActivityAddBlogBinding.inflate(layoutInflater) }

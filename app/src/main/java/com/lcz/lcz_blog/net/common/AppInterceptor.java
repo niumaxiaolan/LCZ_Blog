@@ -4,15 +4,9 @@ package com.lcz.lcz_blog.net.common;
 import android.content.Intent;
 import android.text.TextUtils;
 
-import com.dele.kuaiqicha.base.store.AppManager;
-import com.google.gson.Gson;
-import com.jeremyliao.liveeventbus.LiveEventBus;
 import com.lcz.lcz_blog.App;
-import com.lcz.lcz_blog.module.mian.activity.MainActivity;
 import com.lcz.lcz_blog.module.user.activity.LoginActivity;
 import com.lcz.lcz_blog.store.UserManager;
-import com.lcz.lcz_blog.util.log.LogUtil;
-import com.liuchuanzheng.lcz_wanandroid.base.Constant;
 
 import org.json.JSONObject;
 
@@ -20,16 +14,10 @@ import java.io.EOFException;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.charset.UnsupportedCharsetException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import okhttp3.Headers;
-import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
