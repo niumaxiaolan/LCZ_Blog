@@ -60,5 +60,7 @@ https://gitee.com/liuchuanzheng/LCZ_Blog_Android
 https://gitee.com/liuchuanzheng/LCZ_Blog_java
 # 接口文档
 http://101.37.76.6:10001/swagger-ui.html#/
-
+# 安装包
+https://www.pgyer.com/kE7i
+![image.png](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9cf6237aff3e4d12a3bad664e23fe41e~tplv-k3u1fbpfcp-watermark.image?)
 
