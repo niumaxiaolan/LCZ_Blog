@@ -52,21 +52,6 @@ public class GlideUtil {
         Glide.with(context).load(url).into(imageView);
     }
 
-    /**
-     * 加载公司logo
-     *
-     * @param context
-     * @param url
-     * @param imageView
-     */
-    public static void loadCompany(Context context, String url, ImageView imageView) {
-        RequestOptions options = new RequestOptions()
-                .placeholder(R.drawable.ic_default_company)
-                .error(R.drawable.ic_default_company)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .skipMemoryCache(true);
-        Glide.with(context).load(url).apply(options).into(imageView);
-    }
 
     /**
      * 加载常规图片
