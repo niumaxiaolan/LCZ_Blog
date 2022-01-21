@@ -90,6 +90,6 @@ class EditBlogActivity : BaseVMActivity<EditBlogViewModel>() {
         mViewBinding.layoutTitle.ivBack.setOnClickListener {
             finishAfterTransition()
         }
-        mViewBinding.layoutTitle.tvTitle.text = "发布博客"
+        mViewBinding.layoutTitle.tvTitle.text = "编辑博客"
     }
 }
